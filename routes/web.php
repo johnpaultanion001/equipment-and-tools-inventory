@@ -1,9 +1,4 @@
 <?php
-use App\Http\Controllers\Admin\TransactionController;
-use App\Http\Controllers\Admin\BranchLocatorController;
-use App\Http\Controllers\Admin\FinderClinicContoller;
-use App\Http\Controllers\Admin\ContactUsController;
-use App\Http\Controllers\Admin\CalculatorController;
 
 
 Route::redirect('/', '/login');

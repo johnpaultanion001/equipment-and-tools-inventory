@@ -42,7 +42,6 @@
                         <input type="checkbox">
                         <b >Remember my EmailAddress</b>
                         <br>
-                        <a href="/password/reset" class="ml-3 color-red" style="font-size: 12px">Forgot your password?</a>
                     </div>
                   </div>
                   
