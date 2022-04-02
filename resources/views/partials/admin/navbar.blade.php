@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-primary">
               <div class="container">
                 <div class="navbar-translate">
-                  <a class="navbar-brand" href="#">{{ trans('panel.site_title') }}</a>
+                  <a class="navbar-brand" href="/admin/announcements">{{ trans('panel.site_title') }}</a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-danger" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
                     <span class="navbar-toggler-bar bar2"></span>
@@ -85,6 +85,7 @@
                         </a>
                       </li>
                     @endif
+                    
                       
                       @if (Auth::user())
                         <li class="nav-item dropdown ml-4">

@@ -22,6 +22,7 @@ class CreateClinicsTable extends Migration
             $table->string('business_permit');
             $table->string('lat');
             $table->string('lng');
+            $table->longText('warning_text')->nullable();
             $table->boolean('isApproved')->default(false);
             $table->timestamps();
         });

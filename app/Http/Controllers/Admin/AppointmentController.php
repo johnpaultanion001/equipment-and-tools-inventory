@@ -22,21 +22,24 @@ class AppointmentController extends Controller
                 'services'                => $clinic->services()->get(),
                 'doctors'                 => $clinic->doctors()->get(),
                 'clinic'                  => $clinic->name,
+                'warning_text'                  => $clinic->warning_text,
                 'service_id'              => $service_id,
             ]);
         }if($request->get('form_type') == "EDIT"){
             $appointment_id = $request->get('appointment');
             
-            $appoitment = Appointment::where('id', $appointment_id)->first();
+            $appointment = Appointment::where('id', $appointment_id)->first();
             return response()->json([
-                'services'                => $appoitment->clinic->services()->get(),
-                'doctors'                 => $appoitment->clinic->doctors()->get(),
-                'clinic'                  => $appoitment->clinic->name,
-                'service_id'              => $appoitment->service_id,
-                'doctor_id'               => $appoitment->doctor_id,
-                'date'                    => $appoitment->date,
-                'time'                    => $appoitment->time,
-                'note'                    => $appoitment->note,
+                'services'                => $appointment->clinic->services()->get(),
+                'doctors'                 => $appointment->clinic->doctors()->get(),
+                'clinic'                  => $appointment->clinic->name,
+                'warning_text'            => $appointment->clinic->warning_text,
+                'service_id'              => $appointment->service_id,
+                'doctor_id'               => $appointment->doctor_id,
+                'date'                    => $appointment->date,
+                'time'                    => $appointment->time,
+                'note'                    => $appointment->note,
+                
             ]);
         }
         

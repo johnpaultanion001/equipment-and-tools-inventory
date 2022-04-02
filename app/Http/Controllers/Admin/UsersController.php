@@ -149,6 +149,7 @@ class UsersController extends Controller
             $clinic->address = $request->address;
             $clinic->lat = $request->lat;
             $clinic->lng = $request->lng;
+            $clinic->warning_text = $request->warning_text;
             $clinic->save();
         }
         else if(auth()->user()->roles()->pluck('id')->implode(', ') == 3){

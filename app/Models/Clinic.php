@@ -17,6 +17,7 @@ class Clinic extends Model
         'lng',
         'isApproved',
         'business_permit',
+        'warning_text',
         'created_at',
         'updated_at',
     ];

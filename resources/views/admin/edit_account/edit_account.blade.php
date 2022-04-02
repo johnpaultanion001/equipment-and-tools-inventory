@@ -86,6 +86,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label text-uppercase" >Appointment ( Warning Text)</label>
+                        <textarea name="warning_text" id="warning_text" class="form-control">{{auth()->user()->clinic->warning_text ?? ''}}</textarea>
+                        <span class="invalid-feedback" role="alert">
+                            <strong id="error-warning_text"></strong>
+                        </span>
+                    </div>
                 @endif
               
                 <div class="card-footer text-right">

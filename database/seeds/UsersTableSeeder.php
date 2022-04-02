@@ -58,8 +58,8 @@ class UsersTableSeeder extends Seeder
         $clinics = [
             [
                 'user_id'                   => '2',
-                'name'               => 'Clinic 1',
-                'contact_number'               => '09123456789',
+                'name'                      => 'Clinic 1',
+                'contact_number'            => '09123456789',
                 'address'                   => 'Ground Floor Victory Park & Shop ML Quezon and, P. Oliveros Street, Antipolo, 1870 Rizal',
                 'lat'                       => 14.587449381156755,
                 'lng'                       => 121.175578287383,
@@ -70,8 +70,8 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'user_id'                   => '3',
-                'name'               => 'Clinic 2',
-                'contact_number'               => '09123456789',
+                'name'                      => 'Clinic 2',
+                'contact_number'            => '09123456789',
                 'address'                   => 'Ortigas Ave, Pasig, Metro Manila',
                 'lat'                       => 14.590684405803234,
                 'lng'                       => 121.06905456425052,

@@ -174,6 +174,11 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
+                                    <label class="control-label text-uppercase text-danger h6" id="warning_text"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label text-uppercase  h6" >Note</label>
                                     <textarea name="note" id="note" class="form-control font-weight-bold" ></textarea>
@@ -232,6 +237,12 @@ $(document).on('click', '.edit', function(){
             var doctors = '';
 
             $('#clinic').val(data.clinic);
+            
+            if(data.warning_text == null){
+                $('#warning_text').html(null);
+            }else{
+                $('#warning_text').html('* ' + data.warning_text);
+            }
 
             services += '<option value="" disabled selected>Please Select</option>';
             $.each(data.services, function(key,value){
