@@ -55,7 +55,7 @@
                                                 <div class="col-12">
                                                     <div class="row">
                                                         @foreach($clinic->services()->get() as $service)
-                                                            <div class="col-4">
+                                                            <div class="col-md-4">
                                                                 <button service="{{$service->id}}" class="service btn btn-sm  btn-success text-white">{{$service->name}}</button>
                                                             </div>
                                                         @endforeach
