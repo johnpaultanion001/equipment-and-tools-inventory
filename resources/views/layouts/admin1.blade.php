@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets_admin/img/apple-icon.png') }}">
  
-  <link rel="icon" type="image/png" href="{{ asset('assets_admin/img/favicon.png') }}">
+  <link rel="icon" href="https://ssl.gstatic.com/atari/images/public/favicon.ico">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
@@ -18,7 +18,6 @@
   <script src="https://kit.fontawesome.com/e64ab92996.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
   <link  href="{{ asset('assets_admin/css/bootstrap.min.css') }}" rel="stylesheet" />
-  
   <link href="{{ asset('assets_admin/css/now-ui-kit.css?v=1.3.0') }}" rel="stylesheet" />
 
   <!-- CSS Just for demo purpose, don't include it in your project -->

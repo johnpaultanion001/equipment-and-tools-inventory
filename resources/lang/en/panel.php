@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'FINDER CLINIC',
+    'site_title' => 'UNIFIED INTERNSHIP PROGRAM',
 ];

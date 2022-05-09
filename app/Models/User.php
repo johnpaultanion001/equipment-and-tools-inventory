@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use SoftDeletes, Notifiable, HasApiTokens;
 
@@ -21,7 +21,6 @@ class User extends Authenticatable implements MustVerifyEmail
     
     protected $fillable = [
         'email',
-        'isApproved',
         'email_verified_at',
         
         'password',
@@ -36,14 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
-
-    public function clinic()
+  
+    public function application()
     {
-        return $this->belongsTo(Clinic::class, 'id', 'user_id');
-    }
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'id', 'user_id');
+        return $this->belongsTo(Application::class, 'id', 'user_id');
     }
 
     public function roles()

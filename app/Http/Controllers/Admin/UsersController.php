@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\RoleUser;
 use App\Models\User;
-use App\Models\Client;
-use App\Models\Clinic;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +15,13 @@ use File;
 
 class UsersController extends Controller
 {
+
+    public function home(){
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('user.home'); 
+    }
+
     public function index()
     {
         abort_if(Gate::denies('admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');

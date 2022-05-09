@@ -12,11 +12,9 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'admin_access',
             ],
             [
-                'title' => 'clinic_access',
+                'title' => 'user_access',
             ],
-            [
-                'title' => 'client_access',
-            ],
+           
         ];
 
         Permission::insert($permissions);

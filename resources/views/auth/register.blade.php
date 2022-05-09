@@ -33,45 +33,6 @@
                         </div>
                         @endif
                       </div>
-                      <div class="form-group">
-                        <label class="control-label text-uppercase h6" >Address <span class="text-danger">*</span></label>
-                        <input type="text" id="address" name="address" class="classic-input form-control font-weight-bold {{ $errors->has('address') ? ' is-invalid' : '' }}" value="{{ old('address') }}" placeholder="Address">
-                        @if($errors->has('address'))
-                        <div class="invalid-feedback ">
-                            {{ $errors->first('address') }}
-                        </div>
-                        @endif
-                      </div>
-                      <div id="clinic_info">
-                        <div class="form-group">
-                          <label class="control-label text-uppercase h6" >Location(Latitude) <span class="text-danger">*</span></label>
-                          <input type="text" id="lat" name="lat" class="classic-input form-control font-weight-bold {{ $errors->has('lat') ? ' is-invalid' : '' }}" value="{{ old('lat') }}" placeholder="Location(Latitude)">
-                          @if($errors->has('lat'))
-                          <div class="invalid-feedback ">
-                              {{ $errors->first('lat') }}
-                          </div>
-                          @endif
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label text-uppercase h6" >Location(Longitude) <span class="text-danger">*</span></label>
-                          <input type="text" id="lng" name="lng" class="classic-input form-control font-weight-bold {{ $errors->has('lng') ? ' is-invalid' : '' }}" value="{{ old('lng') }}" placeholder="Location(Longitude)">
-                          @if($errors->has('lng'))
-                          <div class="invalid-feedback ">
-                              {{ $errors->first('lng') }}
-                          </div>
-                          @endif
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label text-uppercase h6" >Upload( Business Permit )<span class="text-danger">*</span></label>
-                          <input type="file" id="business_permit" name="business_permit" accept="image/*" class="classic-input form-control font-weight-bold {{ $errors->has('business_permit') ? ' is-invalid' : '' }}">
-                          @if($errors->has('business_permit'))
-                          <div class="invalid-feedback ">
-                              {{ $errors->first('business_permit') }}
-                          </div>
-                          @endif
-                        </div>
-                      </div>
-                      
                       
                       <div class="form-group">
                         <label class="control-label text-uppercase h6" >Email <span class="text-danger">*</span></label>
@@ -100,17 +61,15 @@
 
                       </div>
 
-                      <input type="hidden" name="user_type" id="user_type" value="Client" />
                       <input type="submit" name="register" id="register" class="btn btn-main" value="Register" />
                       
                     </div>
                   </form>
                 </div>
                 <p class="text-center mt-3 text-dark" style="font-size: 15px; font-weight: 500;">Already have an account? <a href="/login"><button class="btn btn-sm btn-info" style="font-weight: 700">Login here</button></a></p>
-                <p class="text-center mt-2 text-dark" style="font-size: 15px; font-weight: 500;">Register as a <span id="user_label">Clinic</span> ? <button class="btn btn-sm btn-info" id="register_type" style="font-weight: 700">Register here</button>
               </div>
           </div>
-          <div class="d-none d-md-block col-md-6 col-lg-7" style="background-image: url('../assets/images/bg11.jpg'); background-size: cover; background-position: top center;">
+          <div class="d-none d-md-block col-md-6 col-lg-7" style="background-image: url('../assets/images/bg11.png'); background-size: cover; background-position: top center;">
             
           </div>
         </div>
@@ -122,23 +81,6 @@
 @endsection
 @section('scripts')
 <script>
-$(function () {
-  var params = new window.URLSearchParams(window.location.search);
-  var user_type = params.get('user_type')
-  if(user_type == 'Client'){
-    $('#user_type').val('Client');
-    $('#clinic_info').hide();
-    $('#user_label').text('Clinic');
-    
-  }
-  if(user_type == 'Clinic'){
-    $('#user_type').val('Clinic');
-    $('#clinic_info').show();
-    $('#user_label').text('Client');
-  }
-  
-});
-
 
 $("body").on('click', '.toggle-password', function() {
     $(this).toggleClass("fa-eye fa-eye-slash");
@@ -159,19 +101,6 @@ $("body").on('click', '.toggle-confirm_password', function() {
     input.attr("type", "password");
     }
 });
-
-$(document).on('click', '#register_type', function(){
-  var user_type = $('#user_type').val();
-  if(user_type == 'Client'){
-   $('#user_type').val('Clinic');
-   window.location.href = '/register?user_type=Clinic';
-  }
-  if(user_type == 'Clinic'){
-   $('#user_type').val('Client');
-   window.location.href = '/register?user_type=Client';
-  }
-
-})
 
 
 </script>

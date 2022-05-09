@@ -3086,9 +3086,7 @@ textarea.form-control:active {
 
 .form-check input[type="checkbox"],
 .radio input[type="radio"] {
-  opacity: 0;
   position: absolute;
-  visibility: hidden;
 }
 
 .form-check input[type="checkbox"]:checked+.form-check-sign::after {
@@ -3669,11 +3667,12 @@ body {
   overflow-x: hidden;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  background: #f2f2f2 !important;
 }
 
 .main {
   position: relative;
-  background: #FFFFFF;
+  background: #f2f2f2 !important;
 }
 
 /* Animations */
@@ -4596,10 +4595,11 @@ Created using IcoMoon - icomoon.io
 
 .navbar .navbar-brand {
   text-transform: uppercase;
-  font-size: 0.8571em;
+  font-size: 0.9971em;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   line-height: 1.625rem;
+  font-weight: bold;
 }
 
 .navbar .navbar-toggler {

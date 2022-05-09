@@ -23,11 +23,9 @@ class LoginController extends Controller
     }
 
     public function redirectPath(){
-        if(auth()->user()->roles()->pluck('id')->implode(', ') == '3'){
-            return route('admin.announcements.index');
-        }
+       
         if(auth()->user()->roles()->pluck('id')->implode(', ') == '2'){
-            return route('admin.announcements.index');
+            return route('admin.user.home');
         }
         if(auth()->user()->roles()->pluck('id')->implode(', ') == '1'){
             return route('admin.announcements.index');
