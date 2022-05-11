@@ -1,8 +1,8 @@
 .bg-primary{
-    background-color: #2193b0 !important;
+    background-color: #1e90ff !important;
 }
 .btn-primary {
-    background-color: #2193b0 !important;
+    background-color: #1e90ff !important;
     color: #FFFFFF;
 }
 .section{
@@ -25,7 +25,7 @@
     color: #000;
 }
 .color-red{
-    color: #2193b0;
+    color: #1e90ff;
 }
 .color-white {
     color: #ffffff !important;
@@ -58,12 +58,12 @@
 .btn-main{
     border-radius: 8px;
     width: 100%;
-    background: #2193b0;
+    background: #1e90ff;
 }
 .btn-tab {
     border-radius: 8px;
     width: 49%;
-    background: #2193b0;
+    background: #1e90ff;
 }
 
 .btn-secondary {

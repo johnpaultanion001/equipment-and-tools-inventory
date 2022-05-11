@@ -43,7 +43,7 @@
                   
                 </form>
               </div>
-              <p class="text-center mt-3 color-black" style="font-size: 15px; font-weight: 500;">Do not havse an account yet? <a href="/register"><b class="color-black" style="font-weight: 700">Register here</b></a></p>
+              <p class="text-center mt-3 color-black" style="font-size: 15px; font-weight: 500;">Do not have an account yet? <a href="/register"><b class="color-black" style="font-weight: 700">Register here</b></a></p>
             </div>
           </div>
           <div class="d-none d-md-block col-md-6 col-lg-7" style="background-image: url('../assets/images/bg11.png'); background-size: cover; background-position: top center;">

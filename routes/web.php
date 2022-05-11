@@ -6,6 +6,10 @@ Route::redirect('/', '/login');
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    //Admin
+    Route::get('/home', 'AdminController@home')->name('home');
+
+
     //Users 
     Route::get('/user', 'UsersController@home')->name('user.home');
     Route::get('/user/offboarding', 'OffBoardingController@offboarding')->name('user.offboarding');

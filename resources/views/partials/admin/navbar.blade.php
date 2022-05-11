@@ -14,19 +14,25 @@
 
                   @else
                     @if (Auth::user())
-                       <li class="nav-item">
-                          <a class="nav-link {{ request()->is('admin/user')  ? 'active' : '' }}" href="/admin/user">
+                        @can('user_access')
+                            <li class="nav-item">
+                              <a class="nav-link {{ request()->is('admin/user')  ? 'active' : '' }}" href="/admin/user">
+                                <p>HOME</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link {{ request()->is('admin/user/offboarding') || request()->is('admin/user/offboarding/*') ? 'active' : '' }}" href="/admin/user/offboarding">
+                                <p>OFFBOARDING</p>
+                              </a>
+                            </li>
+                        @endcan
+                      
+                      @can('admin_access')
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/home')  ? 'active' : '' }}" href="/admin/home">
                             <p>HOME</p>
                           </a>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link {{ request()->is('admin/user/offboarding') || request()->is('admin/user/offboarding/*') ? 'active' : '' }}" href="/admin/user/offboarding">
-                            <p>OFFBOARDING</p>
-                          </a>
-                        </li>
-                    
-                      
-                      @can('admin_access')
                         <li class="nav-item">
                           <a class="nav-link {{ request()->is('admin/appointments') || request()->is('admin/appointments/*') ? 'active' : '' }}" href="/admin/appointments">
                             <p>APPLICATIONS</p>

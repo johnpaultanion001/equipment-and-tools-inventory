@@ -28,7 +28,25 @@ class Application extends Model
         'starting_date',
         'ending_date',
         'consent',
-        
 
+        //WORK AGREEMENT SECTION
+        'company_name',
+        'company_address',
+        'supervisor_name',
+        'supervisor_email_address',
+        'supervisor_contact_number',
+        'current_job_title',
+        'give_job_titles',
+
+        //INTERNSHIP REQUIREMENTS CHECKLIST
+        'checklist1',
+        'checklist2',
+        'checklist3',
+        'checklist4',
+        'checklist5',
+        'checklist6',
+        'checklist7',
+        'checklist8',
+        'checklist9',
     ];
 }

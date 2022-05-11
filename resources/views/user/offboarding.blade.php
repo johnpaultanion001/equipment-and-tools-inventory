@@ -35,8 +35,8 @@
                                             STEP 1
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#step2" data-toggle="tab">
+                                    <li class="{{Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '' ? '':'active'}}">
+                                        <a href="#step2" data-toggle="tab"  {{Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '' ? 'style=pointer-events:none':''}}>
                                             <div class="icon-circle">
                                                 <i class="ti-arrow-right"></i>
                                             </div>
@@ -44,7 +44,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#step3" data-toggle="tab">
+                                        <a href="#step3" data-toggle="tab" {{Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '' ? 'style=pointer-events:none':''}}>
                                             <div class="icon-circle">
                                                 <i class="ti-arrow-right"></i>
                                             </div>
@@ -68,8 +68,9 @@
                                     <div class="row">
                                         
                                         <div class="col-md-12 mt-2">
-                                            
-                                            <h6 class="font-weight-bold">INTERNS INFORMATION SECTION:</h6>
+                                            <hr>
+                                                <h5 class="font-weight-bold text-info text-center">INTERNS INFORMATION SECTION:</h5>
+                                            <br>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -155,7 +156,6 @@
                                             </div> 
                                         </div>
                                         <div class="col-md-6">
-                                            
                                             <div class="form-group">
                                                 <label>Student's Advisor: <span class="text-danger">*</span></label>
                                                 <input id="student_advisor" name="student_advisor" type="text" class="form-control" placeholder="Flormando Baldovino" value="{{Auth()->user()->application->student_advisor ?? ''}}" />
@@ -213,12 +213,216 @@
                                             </div>
                                         </div>
                                         
+                                        <div class="col-md-12 mt-2">
+                                            <hr>
+                                                <h5 class="font-weight-bold text-info text-center">WORK AGREEMENT SECTION:</h5>
+                                            <br>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Company Name: <span class="text-danger">*</span></label>
+                                                <input id="company_name" name="company_name" type="text" class="form-control" value="{{Auth()->user()->application->company_name ?? ''}}">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-company_name"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Company Address: <span class="text-danger">*</span></label>
+                                                <input id="company_address" name="company_address" type="text" class="form-control" value="{{Auth()->user()->application->company_address ?? ''}}">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-company_address"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Supervisor Name: <span class="text-danger">*</span></label>
+                                                <input id="supervisor_name" name="supervisor_name" type="text" class="form-control" value="{{Auth()->user()->application->supervisor_name ?? ''}}">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-supervisor_name"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Supervisor Email Address: <span class="text-danger">*</span></label>
+                                                <input id="supervisor_email_address" name="supervisor_email_address" type="email" class="form-control" value="{{Auth()->user()->application->supervisor_email_address ?? ''}}">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-supervisor_email_address"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Supervisor Contact Number: <span class="text-danger">*</span></label>
+                                                <input id="supervisor_contact_number" name="supervisor_contact_number" type="number" class="form-control" value="{{Auth()->user()->application->supervisor_contact_number ?? ''}}">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-supervisor_contact_number"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Current Job Title: <span class="text-danger">*</span></label>
+                                                <textarea name="current_job_title" id="current_job_title" class="form-control" placeholder=" Brief Description ">{{Auth()->user()->application->current_job_title ?? ''}}</textarea>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-current_job_title"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Give job title(s) and description for job you hope to have after graduating. <span class="text-danger">*</span></label>
+                                                <textarea name="give_job_titles" id="give_job_titles" class="form-control" placeholder="Title: &#10;Brief Description ">{{Auth()->user()->application->give_job_titles ?? ''}}</textarea>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-give_job_titles"></strong>
+                                                </span>
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <hr>
+                                                <h5 class="font-weight-bold text-info text-center">INTERNSHIP REQUIREMENTS CHECKLIST:</h5>
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="text-justify" style="font-size: 18px;">I have completed the following requirements for virtual Internship program:</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <p class="text-justify" style="font-size: 18px;">I  <b>{{Auth()->user()->application->name}}</b> have read the Internship Handbook. I have discussed each one of the internship requirements with my Academic Advisor Brylle Estrada and MCC, Anafara and Visvis corporation UIP Heads.</p>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist1" id="checklist1" {{Auth()->user()->application->checklist1 == '1' ? 'checked':''}}>
+                                                <label for="checklist1" class="form-check-label" style="font-size: 17px;">I have completed the <a href="">Internship Work Agreement Form</a>  using the most accurate and up-to-date information possible.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist1"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist2" id="checklist2" {{Auth()->user()->application->checklist2 == '1' ? 'checked':''}}>
+                                                <label for="checklist2" class="form-check-label" style="font-size: 17px;">I have already submitted the required documents such as Resume, Letter of endorsement and Notarized MOA.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist2"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist3" id="checklist3" {{Auth()->user()->application->checklist3 == '1' ? 'checked':''}}>
+                                                <label for="checklist3" class="form-check-label" style="font-size: 17px;">I have completed all the tasks provided by the company and completely uploaded all the files to Drive.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist3"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist4" id="checklist4" {{Auth()->user()->application->checklist4 == '1' ? 'checked':''}}>
+                                                <label for="checklist4" class="form-check-label" style="font-size: 17px;">My attendance is complete and the hours I need for the internship are done.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist4"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist5" id="checklist5" {{Auth()->user()->application->checklist5 == '1' ? 'checked':''}}>
+                                                <label for="checklist5" class="form-check-label" style="font-size: 17px;">My attendance logs were checked by HR- Admin.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist5"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist6" id="checklist6" {{Auth()->user()->application->checklist6 == '1' ? 'checked':''}}>
+                                                <label for="checklist6" class="form-check-label" style="font-size: 17px;">I have no bad record with the company and did not commit offenses.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist6"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist7" id="checklist7" {{Auth()->user()->application->checklist7 == '1' ? 'checked':''}}>
+                                                <label for="checklist7" class="form-check-label" style="font-size: 17px;">Immediately upon completion of the internship, I will upload the copy of Certificate of Completion to the submission form.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist7"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist8" id="checklist8" {{Auth()->user()->application->checklist8 == '1' ? 'checked':''}}>
+                                                <label for="checklist8" class="form-check-label" style="font-size: 17px;">I have received an official acceptance letter.</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist8"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-check ml-4">
+                                                <input type="checkbox" class="form-check-input" name="checklist9" id="checklist9" {{Auth()->user()->application->checklist9 == '1' ? 'checked':''}}>
+                                                <label for="checklist9" class="form-check-label" style="font-size: 17px;">I have completed the Off Boarding process</label>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-checklist9"></strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-md-12 mt-5">
+                                            <p class="text-justify" style="font-size: 18px;">I <b>{{Auth()->user()->application->name}}</b> understand that failure to follow the requirements for the Virtual Internship program listed above, will result in my evaluation form provided by the school OJT coordinator will not be filled out by the company representative. The following requirements must be completed before issuing the Evaluation form.</p>
+                                        </div>
+                                       
+                                        <div class="col-md-12 mt-5 row">
+                                            <div class="col-12">
+                                                <hr>
+                                                <br>
+                                            </div>
+                                            <div class="col-6 text-center">
+                                           
+                                                <h6>
+                                                    {{Auth()->user()->application->name}}
+                                                </h6>
+                                                <h6  style="font-size: 12px;">Intern's Signature</h6>
+                                            </div>
+                                            <div class="col-6 text-center">
+                                                <h6>
+                                                    {{ Auth()->user()->application->created_at->format('M j , Y ') }}
+                                                </h6>
+                                                <h6  style="font-size: 12px;">Date</h6>
+                                            </div>
+                                            <div class="col-12">
+                                                <br>
+                                                <br>
+                                            </div>
+                                            <div class="col-6 text-center">
+                                                <h6>
+                                                    Mr. Brylle Estrada
+                                                </h6>
+                                                <h6  style="font-size: 12px;">UIP ADMINISTRATIVE HEAD’S SIGNATURE</h6>
+                                            </div>
+                                            <div class="col-6 text-center">
+                                                <h6>
+                                                    {{ Auth()->user()->application->created_at->format('M j , Y ') }}
+                                                </h6>
+                                                <h6  style="font-size: 12px;">Date</h6>
+                                            </div>
+                                        </div>
+
+                                        
                                         <div class="col-md-12 text-center mt-5">
                                             <h6 class="text-danger text-uppercase">* please double check all the information before you submit it </h6>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="step2">
+
+                                <div class="tab-pane {{Auth()->user()->application->status == 'PENDING' ? '':'active'}}" id="step2">
                                     step 2
                                    
                                 </div>
@@ -228,7 +432,12 @@
                             </div>
                             <div class="wizard-footer">
                                 <div class="pull-right">
-                                    <input type='submit' class='btn btn-fill btn-info btn-wd' id="action_button"value='Submit' />
+                                    @if(Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '')
+                                        <input type='submit' class='btn btn-fill btn-info btn-wd' id="action_button"value='Submit' />
+                                    @else
+                                        <input type='button' class='btn btn-next btn-fill btn-info btn-wd' name='next' value='Next' />   
+                                    @endif
+                                    
                                 </div>
 
                                 <div class="pull-left">

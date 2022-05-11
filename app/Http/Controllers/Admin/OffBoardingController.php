@@ -25,43 +25,54 @@ class OffBoardingController extends Controller
 
         if(auth()->user()->application->image != '')
         {
-            $validated =  Validator::make($request->all(), [
-                'name'   => ['required'],
-                'school' => ['required'],
-                'image_file' =>  ['mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'],
-                'course' => ['required'],
-                'contact_number' => ['required', 'string', 'min:8','max:11'],
-                'birth_date' => ['required', 'date' , 'before:today'],
-                'address' => ['required'],
-
-                'student_advisor' => ['required'],
-                'required_hours' => ['required'],
-                'schedule' => ['required'],
-                'starting_date' => ['required', ],
-                'ending_date' => ['required'],
-                'consent' => ['accepted'],
-
-            ]);
+            $validation_image =  ['mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'];
         }
         else{
-            $validated =  Validator::make($request->all(), [
-                'name'   => ['required'],
-                'school' => ['required'],
-                'image_file' =>  ['required','mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'],
-                'course' => ['required'],
-                'contact_number' => ['required', 'string', 'min:8','max:11'],
-                'birth_date' => ['required', 'date' , 'before:today'],
-                'address' => ['required'],
-
-                'student_advisor' => ['required'],
-                'required_hours' => ['required'],
-                'schedule' => ['required'],
-                'starting_date' => ['required', ],
-                'ending_date' => ['required'],
-                'consent' => ['accepted'],
-            ]);
+            $validation_image =  ['required', 'mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'];
         }
 
+        $validated =  Validator::make($request->all(), [
+            'name'   => ['required'],
+            'school' => ['required'],
+            'image_file' =>  $validation_image,
+            'course' => ['required'],
+            'contact_number' => ['required', 'string', 'min:8','max:11'],
+            'birth_date' => ['required', 'date' , 'before:today'],
+            'address' => ['required'],
+
+            'student_advisor' => ['required'],
+            'required_hours' => ['required'],
+            'schedule' => ['required'],
+            'starting_date' => ['required', ],
+            'ending_date' => ['required'],
+            'consent' => ['accepted'],
+            'company_name' => ['required'],
+            'company_address' => ['required'],
+            'supervisor_name' => ['required'],
+            'supervisor_email_address' => ['required'],
+            'supervisor_contact_number' => ['required', 'string', 'min:8','max:11'],
+            'current_job_title' => ['required'],
+            'give_job_titles' => ['required'],
+
+            'checklist1' => ['accepted'],
+            'checklist2' => ['accepted'],
+            'checklist3' => ['accepted'],
+            'checklist4' => ['accepted'],
+            'checklist5' => ['accepted'],
+            'checklist6' => ['accepted'],
+            'checklist7' => ['accepted'],
+            'checklist8' => ['accepted'],
+            'checklist9' => ['accepted'],
+            
+        ], ['checklist1.accepted' => 'This checklist must be accepted.',
+            'checklist2.accepted' => 'This checklist must be accepted.',
+            'checklist3.accepted' => 'This checklist must be accepted.',
+            'checklist4.accepted' => 'This checklist must be accepted.',
+            'checklist5.accepted' => 'This checklist must be accepted.',
+            'checklist6.accepted' => 'This checklist must be accepted.',
+            'checklist7.accepted' => 'This checklist must be accepted.',
+            'checklist8.accepted' => 'This checklist must be accepted.',
+            'checklist9.accepted' => 'This checklist must be accepted.'],);
         
 
         if ($validated->fails()) {
@@ -92,6 +103,24 @@ class OffBoardingController extends Controller
             'starting_date' => $request->input('starting_date'),
             'ending_date' => $request->input('ending_date'),
             'consent' => 1,
+
+            'company_name' => $request->input('company_name'),
+            'company_address' => $request->input('company_address'),
+            'supervisor_name' => $request->input('supervisor_name'),
+            'supervisor_email_address' => $request->input('supervisor_email_address'),
+            'supervisor_contact_number' => $request->input('supervisor_contact_number'),
+            'current_job_title' => $request->input('current_job_title'),
+            'give_job_titles' => $request->input('give_job_titles'),
+
+            'checklist1' => 1,
+            'checklist2' => 1,
+            'checklist3' => 1,
+            'checklist4' => 1,
+            'checklist5' => 1,
+            'checklist6' => 1,
+            'checklist7' => 1,
+            'checklist8' => 1,
+            'checklist9' => 1,
 
         ]);
 

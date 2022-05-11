@@ -28,7 +28,7 @@ class LoginController extends Controller
             return route('admin.user.home');
         }
         if(auth()->user()->roles()->pluck('id')->implode(', ') == '1'){
-            return route('admin.announcements.index');
+            return route('admin.home');
         }
        
 
