@@ -8,6 +8,11 @@ Auth::routes();
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     //Admin
     Route::get('/home', 'AdminController@home')->name('home');
+    Route::resource('email', 'RegisterEmailController');
+    Route::get('/applications', 'ApplicationController@index')->name('index');
+    Route::get('/applications/{application}', 'ApplicationController@full_details')->name('full_details');
+    Route::get('/applications/{application}/status', 'ApplicationController@status')->name('status');
+    Route::post('/applications/{application}/status', 'ApplicationController@set_status')->name('set_status');
 
 
     //Users 

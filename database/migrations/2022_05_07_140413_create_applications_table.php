@@ -53,10 +53,12 @@ class CreateApplicationsTable extends Migration
             $table->string('checklist7')->nullable();
             $table->string('checklist8')->nullable();
             $table->string('checklist9')->nullable();
-            
+            $table->string('proof_of_attendance')->nullable();
+            $table->string('advance_coc')->nullable();
 
+            //FOR ADMIN
+            $table->string('admin_attach_file')->nullable();
             
-
             $table->timestamps();
         });
     }

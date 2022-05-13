@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="navbar navbar-expand-lg">
               <div class="container">
                 <div class="navbar-translate">
                   <a class="navbar-brand" href="/admin/announcements">{{ trans('panel.site_title') }}</a>
@@ -34,7 +34,12 @@
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link {{ request()->is('admin/appointments') || request()->is('admin/appointments/*') ? 'active' : '' }}" href="/admin/appointments">
+                          <a class="nav-link {{ request()->is('admin/email')  ? 'active' : '' }}" href="/admin/email">
+                            <p>REGISTER EMAIL</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/applications') || request()->is('admin/applications/*') ? 'active' : '' }}" href="/admin/applications">
                             <p>APPLICATIONS</p>
                           </a>
                         </li>

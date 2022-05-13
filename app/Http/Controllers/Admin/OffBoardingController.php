@@ -31,6 +31,14 @@ class OffBoardingController extends Controller
             $validation_image =  ['required', 'mimes:png,jpg,jpeg,svg,bmp,ico', 'max:2040'];
         }
 
+        if(auth()->user()->application->proof_of_attendance != '')
+        {
+            $validation_poa =  ['max:2040'];
+        }
+        else{
+            $validation_poa =  ['required', 'max:2040'];
+        }
+
         $validated =  Validator::make($request->all(), [
             'name'   => ['required'],
             'school' => ['required'],
@@ -63,7 +71,9 @@ class OffBoardingController extends Controller
             'checklist7' => ['accepted'],
             'checklist8' => ['accepted'],
             'checklist9' => ['accepted'],
-            
+            'proof_of_attendance' => $validation_poa,
+            'advance_coc'         => ['required'],
+
         ], ['checklist1.accepted' => 'This checklist must be accepted.',
             'checklist2.accepted' => 'This checklist must be accepted.',
             'checklist3.accepted' => 'This checklist must be accepted.',
@@ -72,7 +82,10 @@ class OffBoardingController extends Controller
             'checklist6.accepted' => 'This checklist must be accepted.',
             'checklist7.accepted' => 'This checklist must be accepted.',
             'checklist8.accepted' => 'This checklist must be accepted.',
-            'checklist9.accepted' => 'This checklist must be accepted.'],);
+            'checklist9.accepted' => 'This checklist must be accepted.',
+            'advance_coc.required' => 'The Do you need an advance COC? field is required ',
+
+        ],);
         
 
         if ($validated->fails()) {
@@ -83,6 +96,12 @@ class OffBoardingController extends Controller
             $extension = $imgs->getClientOriginalExtension(); 
             $file_name_to_save = auth()->user()->application->id."_".$request->input('name').".".$extension;
             $imgs->move('assets/applicant_picture/', $file_name_to_save);
+        }
+        if($request->file('proof_of_attendance')){
+            $file = $request->file('proof_of_attendance');
+            $extension = $file->getClientOriginalExtension(); 
+            $proof_of_attendance = auth()->user()->application->id."_".$request->input('name').".".$extension;
+            $file->move('assets/applicant_proof_of_attendance/', $proof_of_attendance);
         }
         
 
@@ -122,6 +141,8 @@ class OffBoardingController extends Controller
             'checklist8' => 1,
             'checklist9' => 1,
 
+            'proof_of_attendance' => $proof_of_attendance ?? auth()->user()->application->proof_of_attendance,
+            'advance_coc' => $request->input('advance_coc'),
         ]);
 
         return response()->json(['success' => 'Saved Successfully.']);

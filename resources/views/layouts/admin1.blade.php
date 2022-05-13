@@ -16,6 +16,12 @@
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/e64ab92996.js" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome Icons -->
+    <script src="https://use.fontawesome.com/5882f93e19.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/icons/css/fontawesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/icons/css/solid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/icons/css/all.css') }}">
   <!-- CSS Files -->
   <link  href="{{ asset('assets_admin/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets_admin/css/now-ui-kit.css?v=1.3.0') }}" rel="stylesheet" />
@@ -72,15 +78,21 @@
 </head>
 
 <body class="index-page sidebar-collapse">
-  @include('partials.admin.navbar')
-  <div class="wrapper">
-      <div class="main">
-       <div class="row">
-            <div id="success-alert" class="col-4 alert text-white fade show fixed-top mt-4" data-dismiss="alert" style="margin-left: 65%; z-index: 9999;" role="alert"></div>
+  <div class="background">
+    @include('partials.admin.navbar')
+    <div class="wrapper">
+        <div class="main">
+        
+        <div class="row">
+              <div id="success-alert" class="col-4 alert text-white fade show fixed-top mt-4" data-dismiss="alert" style="margin-left: 65%; z-index: 9999;" role="alert"></div>
+          </div>
+          @yield('content')
+          
         </div>
-        @yield('content')
-      </div>
+        
+    </div>
   </div>
+
   <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
       {{ csrf_field() }}
   </form>

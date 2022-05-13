@@ -8,7 +8,12 @@
 <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 <link href="{{ asset('/assets/css/themify-icons.css') }}" rel="stylesheet">
 
-
+<style>
+  .background{
+    height:100% !important;
+    width: 100% !important;
+  }
+</style>
 @endsection
 
 @section('content')
@@ -21,6 +26,11 @@
                             @csrf
                             <div class="wizard-header text-center">
                                 <h3 class="wizard-title font-weight-bold">OFFBOARDING PROCESS</h3>
+                            </div>
+                            <div class="wizard-header text-right">
+                                @if(Auth()->user()->application->status != '')
+                                    <span class="wizard-title font-weight-bold">STATUS: <span class="@if(Auth()->user()->application->status == 'PENDING') text-warning @elseif(Auth()->user()->application->status == 'APPROVED') text-success @elseif(Auth()->user()->application->status == 'COMPLETED')  text-info @endif">{{Auth()->user()->application->status ?? ''}}</span></span>
+                                @endif
                             </div>
                             <div class="wizard-navigation">
                                 <div class="progress-with-circle">
@@ -35,7 +45,7 @@
                                             STEP 1
                                         </a>
                                     </li>
-                                    <li class="{{Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '' ? '':'active'}}">
+                                    <li class="{{Auth()->user()->application->status == 'APPROVED' ? 'active':''}}">
                                         <a href="#step2" data-toggle="tab"  {{Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '' ? 'style=pointer-events:none':''}}>
                                             <div class="icon-circle">
                                                 <i class="ti-arrow-right"></i>
@@ -43,7 +53,7 @@
                                             STEP 2
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="{{Auth()->user()->application->status == 'COMPLETED' ? 'active':''}}">
                                         <a href="#step3" data-toggle="tab" {{Auth()->user()->application->status == 'PENDING' || Auth()->user()->application->status == '' ? 'style=pointer-events:none':''}}>
                                             <div class="icon-circle">
                                                 <i class="ti-arrow-right"></i>
@@ -102,9 +112,6 @@
                                                         <strong style="color: #dc3545;" id="error-wizard-picture"></strong>
                                                     </span>
                                                 </div>
-                                                
-                                           
-                                            
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -178,7 +185,9 @@
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong id="error-required_hours"></strong>
                                                 </span>
-                                            </div> 
+                                            </div>
+                                           
+                                           
                                             <div class="form-group">
                                                 <label>Starting Date: <span class="text-danger">*</span></label>
                                                 <input id="starting_date" name="starting_date" type="date" class="form-control" value="{{Auth()->user()->application->starting_date ?? ''}}"/>
@@ -186,8 +195,7 @@
                                                     <strong id="error-starting_date"></strong>
                                                 </span>
                                             </div> 
-                                        </div>
-                                        <div class="col-md-6">
+
                                             <div class="form-group">
                                                 <label>Schedule: <span class="text-danger">*</span></label>
                                                 <input id="schedule" name="schedule" type="text" class="form-control" value="{{Auth()->user()->application->schedule ?? ''}}" placeholder="MTWTTHF/8am to 5 pm" />
@@ -195,6 +203,19 @@
                                                     <strong id="error-schedule"></strong>
                                                 </span>
                                             </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Do you need an advance COC? <span class="text-danger">*</span></label>
+                                                <select name="advance_coc" id="advance_coc" class="form-control">
+                                                    <option value="">...</option>
+                                                    <option value="YES" {{Auth()->user()->application->advance_coc == 'YES' ? 'selected':''}}>YES</option>
+                                                    <option value="NO" {{Auth()->user()->application->advance_coc == 'NO' ? 'selected':''}}>NO</option>
+                                                </select>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-advance_coc"></strong>
+                                                </span>
+                                            </div> 
                                             <div class="form-group">
                                                 <label>Ending Date: <span class="text-danger">*</span></label>
                                                 <input id="ending_date" name="ending_date" type="date" class="form-control" value="{{Auth()->user()->application->ending_date ?? ''}}"  />
@@ -374,6 +395,16 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 mt-2">
+                                              <div class="form-group">
+                                                <label>Proof of your attendance: <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="proof_of_attendance" id="proof_of_attendance">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-proof_of_attendance"></strong>
+                                                </span>
+                                                <a href="/assets/applicant_proof_of_attendance/{{Auth()->user()->application->proof_of_attendance}}" target="_blank">{{Auth()->user()->application->proof_of_attendance}}</a>
+                                            </div> 
+                                        </div>
                                        
                                         <div class="col-md-12 mt-5">
                                             <p class="text-justify" style="font-size: 18px;">I <b>{{Auth()->user()->application->name}}</b> understand that failure to follow the requirements for the Virtual Internship program listed above, will result in my evaluation form provided by the school OJT coordinator will not be filled out by the company representative. The following requirements must be completed before issuing the Evaluation form.</p>
@@ -422,11 +453,21 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane {{Auth()->user()->application->status == 'PENDING' ? '':'active'}}" id="step2">
-                                    step 2
+                                <div class="tab-pane {{Auth()->user()->application->status == 'APPROVED' ? 'active':''}}" id="step2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="text-justify font-weight-bold" style="font-size: 18px;">Please download the attached <a href="/assets/attach_file/{{Auth()->user()->application->admin_attach_file ?? ''}}" target="_blank">file</a> and upload it to your google drive. Send the link of your drive to our partner shop below. </p>
+                                            <p class="text-justify font-weight-bold text-center" style="font-size: 18px;">Partner Shop: <a target="_blank" href="https://shopee.ph/product/299893127/11121762967?fbclid=IwAR2m1xM1KRXmcuID70GUZgrpgHQK9dml3tFw_rXrJ8OeNlUzeKupOoXquLo">Partner Shop Link</a> </p>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-md-12 text-center mt-5">
+                                            <h6 class="text-danger text-uppercase">* Please make sure to give access to anyone with the link</h6>
+                                        </div>
+                                    </div>
                                    
                                 </div>
-                                <div class="tab-pane" id="step3">
+                                <div class="tab-pane {{Auth()->user()->application->status == 'COMPLETED' ? 'active':''}}" id="step3">
                                     step 3
                                 </div>
                             </div>
@@ -447,6 +488,7 @@
                             </div>
                         </form>
                     </div>
+                    <br><br><br>
                 </div>
             
             </div>
@@ -505,6 +547,7 @@ $('#myForm').on('submit', function(event){
             }
             if(data.success){
                 location.reload();
+                $(window).scrollTop(0);
             }
             
         }

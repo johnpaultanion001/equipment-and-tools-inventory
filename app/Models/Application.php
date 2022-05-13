@@ -48,5 +48,16 @@ class Application extends Model
         'checklist7',
         'checklist8',
         'checklist9',
+        'proof_of_attendance',
+        'advance_coc',
+
+        // For admin
+        'admin_attach_file',
+
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
