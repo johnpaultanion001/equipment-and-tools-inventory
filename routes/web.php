@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/user', 'UsersController@home')->name('user.home');
     Route::get('/user/offboarding', 'OffBoardingController@offboarding')->name('user.offboarding');
     Route::post('/user/offboarding', 'OffBoardingController@application')->name('user.offboarding.application');
+    Route::put('/user/offboarding/receive_status', 'OffBoardingController@receive_status')->name('user.receive_status.application');
+    Route::post('/user/offboarding/answer_video', 'OffBoardingController@answer_video')->name('user.answer_video.application');
 
     //Accounts
     Route::get('/accounts', 'UsersController@index')->name('accounts.index');

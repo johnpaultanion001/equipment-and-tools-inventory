@@ -148,4 +148,46 @@ class OffBoardingController extends Controller
         return response()->json(['success' => 'Saved Successfully.']);
 
     }
+
+    public function receive_status(){
+
+        if(auth()->user()->application->receive_status == '0'){
+            Application::where('user_id', auth()->user()->id)->update([
+                'receive_status'        => '1',
+            ]);
+        }else{
+            Application::where('user_id', auth()->user()->id)->update([
+                'receive_status'        => '0',
+            ]);
+        }
+
+        return response()->json(['success' => 'Saved Successfully.']);
+        
+    }
+
+    public function answer_video(Request $request){
+       
+        if(auth()->user()->application->answer_video == '')
+        {
+            if(!$request->file('answer_video'))
+            {
+                return response()->json(['error' => 'This field is required.']);
+            }
+        }
+
+        if($request->file('answer_video')){
+            $file = $request->file('answer_video');
+            $extension = $file->getClientOriginalExtension(); 
+            $answer_video = auth()->user()->application->id."_".auth()->user()->application->name.".".$extension;
+            $file->move('assets/applicant_answer_video/', $answer_video);
+        }
+        Application::where('user_id', auth()->user()->id)->update([
+            'answer_video' => $answer_video ?? auth()->user()->application->answer_video,
+        ]);
+
+        $application = Application::where('user_id', auth()->user()->id)->first();
+
+        return response()->json(['success' => $application->answer_video]);
+
+    }
 }

@@ -459,6 +459,11 @@
                                             <p class="text-justify font-weight-bold" style="font-size: 18px;">Please download the attached <a href="/assets/attach_file/{{Auth()->user()->application->admin_attach_file ?? ''}}" target="_blank">file</a> and upload it to your google drive. Send the link of your drive to our partner shop below. </p>
                                             <p class="text-justify font-weight-bold text-center" style="font-size: 18px;">Partner Shop: <a target="_blank" href="https://shopee.ph/product/299893127/11121762967?fbclid=IwAR2m1xM1KRXmcuID70GUZgrpgHQK9dml3tFw_rXrJ8OeNlUzeKupOoXquLo">Partner Shop Link</a> </p>
                                         </div>
+                                        <div class="col-md-12 text-center">
+                                            <p>After you send the link to our partner shop, please wait 3-5 business days for your COC hardcopy. </p>
+                                                <h6 class="text-danger text-uppercase"> NOTE: Click on the "Receive" button below once you received your COC hardcopy from our partner shop. If you don't need one of it, just click on the "Next" button to proceed.</h6>
+                                            <button id="receive_status" class="{{Auth()->user()->application->receive_status == '0' ? 'btn-warning':'btn-default'}} btn btn-fill btn-wd">{{Auth()->user()->application->receive_status == '0' ? 'Receive':'Received'}}</button>
+                                        </div>
                                         
                                         
                                         <div class="col-md-12 text-center mt-5">
@@ -468,7 +473,26 @@
                                    
                                 </div>
                                 <div class="tab-pane {{Auth()->user()->application->status == 'COMPLETED' ? 'active':''}}" id="step3">
-                                    step 3
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>Questions:</p>
+                                            <p>1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <p>2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <p>3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                
+                                        </div>
+                                        <div class="col-md-12">
+                                              <div class="form-group">
+                                                <label>Attach your answer: <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="answer_video" id="answer_video" accept="video/mp4,video/x-m4v,video/*">
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong id="error-answer_video"></strong>
+                                                </span>
+                                                <a id="answer_link" href="/assets/applicant_answer_video/{{Auth()->user()->application->answer_video}}" target="_blank">{{Auth()->user()->application->answer_video}}</a>
+                                            </div> 
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="wizard-footer">
@@ -478,7 +502,7 @@
                                     @else
                                         <input type='button' class='btn btn-next btn-fill btn-info btn-wd' name='next' value='Next' />   
                                     @endif
-                                    
+                                    <button type="button" class="btn btn-fill btn-success btn-wd btn-finish">Finish</button>
                                 </div>
 
                                 <div class="pull-left">
@@ -491,6 +515,29 @@
                     <br><br><br>
                 </div>
             
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                           <p>
+                                Congratulations
+                           </p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer bg-white">
+                        <button type="button" class="btn  btn-white text-uppercase" data-dismiss="modal"></button>
+                        <button type="button" class="btn  btn-white text-uppercase" data-dismiss="modal">Close</button>
+                </div>
+        
             </div>
         </div>
     </div>
@@ -552,6 +599,59 @@ $('#myForm').on('submit', function(event){
             
         }
     });
+});
+
+
+$(document).on('click', '#receive_status', function(){
+        $.ajax({
+            url:"/admin/user/offboarding/receive_status",
+            method:'PUT',
+            dataType:"json",
+            data: {
+                          _token: '{!! csrf_token() !!}',
+                      },
+            beforeSend:function(){
+                $("#receive_status").attr("disabled", true);
+            },
+            success:function(data){
+                location.reload();
+            }
+        })
+
+});
+
+$(document).on('click', '.btn-finish', function(){
+       var answer_video = $("#answer_video").prop("files")[0]; 
+
+       var form_data = new FormData();
+                form_data.append("answer_video", answer_video);
+                form_data.append("_token", '{{csrf_token()}}');
+
+        $.ajax({
+            url :"/admin/user/offboarding/answer_video",
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            method: "post",
+            beforeSend:function(){
+                $('.btn-finish').attr('disabled', true);
+            },
+            success:function(data){
+                $('.btn-finish').attr('disabled', false);
+                if(data.error){
+                    $('#answer_video').addClass('is-invalid')
+                    $('#error-answer_video').text(data.error)
+                }
+                if(data.success){
+                    $('#answer_video').removeClass('is-invalid')
+                    $('#answer_link').attr('href', '/assets/applicant_answer_video/' + data.success);
+                    $('#answer_link').text(data.success);
+                    $('#myModal').modal('show');
+                }
+            }
+      });       
 });
 
 

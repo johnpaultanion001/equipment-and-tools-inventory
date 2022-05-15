@@ -59,6 +59,13 @@ class CreateApplicationsTable extends Migration
             //FOR ADMIN
             $table->string('admin_attach_file')->nullable();
             
+            //STEP 2
+            $table->string('receive_status')->default('0');
+
+            //STEP 3
+            $table->string('answer_video')->nullable();
+            
+
             $table->timestamps();
         });
     }

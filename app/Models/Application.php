@@ -54,6 +54,12 @@ class Application extends Model
         // For admin
         'admin_attach_file',
 
+        // step2
+        'receive_status',
+
+        // step3
+        'answer_video',
+
     ];
 
     public function user()

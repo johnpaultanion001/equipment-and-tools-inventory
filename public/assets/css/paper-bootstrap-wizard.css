@@ -577,7 +577,7 @@ input[type="button"]:focus {
 }
 .navbar .navbar-nav > li > a.btn.btn-success.btn-fill, .btn-success.btn-fill {
   color: #FFFFFF;
-  background-color: #7AC29A;
+  background-color: #18ce0f;
   opacity: 1;
   filter: alpha(opacity=100);
 }
