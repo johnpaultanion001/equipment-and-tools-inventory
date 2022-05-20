@@ -5,10 +5,16 @@ Route::redirect('/', '/login');
 
 Auth::routes();
 
+Route::post('/registration', 'RegistrationController@store')->name('registration.store');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     //Admin
     Route::get('/home', 'AdminController@home')->name('home');
-    Route::resource('email', 'RegisterEmailController');
+    // Route::resource('email', 'RegisterEmailController');
+    Route::get('/registration', 'RegistrationController@index')->name('registration');
+    Route::get('/registration/{id}', 'RegistrationController@show')->name('registration.show');
+    Route::post('/registration/{id}', 'RegistrationController@store')->name('registration.store');
+
     Route::get('/applications', 'ApplicationController@index')->name('index');
     Route::get('/applications/{application}', 'ApplicationController@full_details')->name('full_details');
     Route::get('/applications/{application}/status', 'ApplicationController@status')->name('status');

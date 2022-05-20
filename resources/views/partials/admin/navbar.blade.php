@@ -33,11 +33,16 @@
                             <p>HOME</p>
                           </a>
                         </li>
-                        <li class="nav-item">
+                         <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/registration')  ? 'active' : '' }}" href="/admin/registration">
+                            <p>REGISTRATION</p>
+                          </a>
+                        </li>
+                        <!-- <li class="nav-item">
                           <a class="nav-link {{ request()->is('admin/email')  ? 'active' : '' }}" href="/admin/email">
                             <p>REGISTER EMAIL</p>
                           </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                           <a class="nav-link {{ request()->is('admin/applications') || request()->is('admin/applications/*') ? 'active' : '' }}" href="/admin/applications">
                             <p>APPLICATIONS</p>

@@ -13,7 +13,7 @@
       <div class="col-xl-8 mx-auto mt-5">
       <div class="card p-3  d-block mx-auto">
         <div class="py-4">
-          <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+          <form method="POST" id="myForm" class="form-horizontal ">
             @csrf
             <div class="card-header text-center px-3 px-md-4 py-0">
               <h3 class="card-title title-up  mt-4
@@ -22,53 +22,63 @@
             </div>
             
             <div class="card-body px-4 px-md-5">
-              <div class="form-group">
-              <label class="control-label text-uppercase h6" >Name <span class="text-danger">*</span></label>
-                <input type="text" id="name" name="name" class="classic-input form-control font-weight-bold {{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{ old('name') }}" placeholder="Name" autofocus >
-                @if($errors->has('name'))
-                <div class="invalid-feedback ">
-                    {{ $errors->first('name') }}
+                <div class="row">
+                  <div class="col-sm-6">
+                          <div class="form-group text-uppercase h6">
+                          <label>Name:  <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="name" id="name" placeholder="Name" autofocus>
+                          <span class="invalid-feedback" role="alert">
+                              <strong id="error-name"></strong>
+                          </span>
+                      </div> 
+                  </div>
+                  <div class="col-sm-6">
+                          <div class="form-group text-uppercase h6">
+                          <label>School:  <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="school" id="school" placeholder="School">
+                          <span class="invalid-feedback" role="alert">
+                              <strong id="error-school"></strong>
+                          </span>
+                      </div> 
+                  </div>
+                  <div class="col-sm-6">
+                          <div class="form-group text-uppercase h6">
+                          <label>Intern ID:  <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="intern_id" id="intern_id" placeholder="Intern ID">
+                          <span class="invalid-feedback" role="alert">
+                              <strong id="error-intern_id"></strong>
+                          </span>
+                      </div> 
+                  </div>
+                  <div class="col-sm-6">
+                          <div class="form-group text-uppercase h6">
+                          <label>Email:  <span class="text-danger">*</span></label>
+                          <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                          <span class="invalid-feedback" role="alert">
+                              <strong id="error-email"></strong>
+                          </span>
+                      </div> 
+                  </div>
+                  <div class="col-sm-12">
+                          <div class="form-group text-uppercase h6">
+                          <label>Google Drive Link:  <span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="google_drive" id="google_drive" placeholder="Google Drive Link">
+                          <span class="invalid-feedback" role="alert">
+                              <strong id="error-google_drive"></strong>
+                          </span>
+                      </div> 
+                  </div>
+                  <div class="col-sm-12">
+                          <div class="form-group text-uppercase h6">
+                          <label>Attach Proof Of Attendance:  <span class="text-danger">*</span></label>
+                          <input type="file" class="form-control" name="attach_attendance" id="attach_attendance" placeholder="Attach Proof Of Attendance">
+                          <span class="invalid-feedback" role="alert">
+                              <strong id="error-attach_attendance"></strong>
+                          </span>
+                      </div> 
+                  </div>
                 </div>
-                @endif
-              </div>
-              <div class="form-group">
-                <label class="control-label text-uppercase h6" >Contact Number <span class="text-danger">*</span></label>
-                <input type="number" id="contact_number" name="contact_number" class="classic-input form-control font-weight-bold {{ $errors->has('contact_number') ? ' is-invalid' : '' }}" value="{{ old('contact_number') }}" placeholder="Contact Number">
-                @if($errors->has('contact_number'))
-                <div class="invalid-feedback ">
-                    {{ $errors->first('contact_number') }}
-                </div>
-                @endif
-              </div>
-              
-              <div class="form-group">
-                <label class="control-label text-uppercase h6" >Email <span class="text-danger">*</span></label>
-                <input type="email" id="email" name="email" class="classic-input form-control font-weight-bold {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" placeholder="Email" >
-                @if($errors->has('email'))
-                <div class="invalid-feedback ">
-                    {{ $errors->first('email') }}
-                </div>
-                @endif
-              </div>
-              <div class="form-group">
-                <label class="control-label text-uppercase h6" >Password <span class="text-danger">*</span></label>
-                <input type="password" id="password" name="password" class="classic-input form-control font-weight-bold {{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password">
-                <span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="float: right; margin-right: 10px; margin-top: -25px; position: relative; z-index: 2;"></span>
-                
-                @if($errors->has('password'))
-                <div class="invalid-feedback ">
-                    {{ $errors->first('password') }}
-                </div>
-                @endif
-              </div>
-              <div class="form-group">
-                  <label class="control-label text-uppercase h6" >Confirm Password <span class="text-danger">*</span></label>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="classic-input form-control font-weight-bold" placeholder="Confirm Password">
-                <span toggle="#confirm_password-field" class="fa fa-fw fa-eye field_icon toggle-confirm_password" style="float: right; margin-right: 10px; margin-top: -25px; position: relative; z-index: 2;"></span>
-
-              </div>
-
-              <input type="submit" name="register" id="register" class="btn btn-main" value="Register" />
+              <input type="submit" id="action_button" class="btn btn-main" value="Submit" />
               
             </div>
           </form>
@@ -82,27 +92,55 @@
 @endsection
 @section('scripts')
 <script>
+  $('#myForm').on('submit', function(event){
+      event.preventDefault();
+      $('.form-control').removeClass('is-invalid')
+      var action_url = "/registration";
+      var type = "POST";
 
-$("body").on('click', '.toggle-password', function() {
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    var input = $("#password");
-    if (input.attr("type") === "password") {
-    input.attr("type", "text");
-    } else {
-    input.attr("type", "password");
-    }
-});
+      $.ajax({
+          url: action_url,
+          method:type,
+          data:  new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          dataType:"json",
 
-$("body").on('click', '.toggle-confirm_password', function() {
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    var input = $("#password_confirmation");
-    if (input.attr("type") === "password") {
-    input.attr("type", "text");
-    } else {
-    input.attr("type", "password");
-    }
-});
-
-
+          beforeSend:function(){
+              $("#action_button").attr("disabled", true);
+          },
+          success:function(data){
+              $("#action_button").attr("disabled", false);
+          
+              if(data.errors){
+                  $.each(data.errors, function(key,value){
+                      if(key == $('#'+key).attr('id')){
+                          $('#'+key).addClass('is-invalid')
+                          $('#error-'+key).text(value)
+                      }
+                  })
+              }
+              if(data.success){
+                  $.confirm({
+                      title: data.success,
+                      content: "",
+                      type: 'green',
+                      buttons: {
+                          confirm: {
+                              text: '',
+                              btnClass: 'btn-green',
+                              keys: ['enter', 'shift'],
+                              action: function(){
+                                  location.reload();
+                              }
+                          },
+                      }
+                  });
+              }
+              
+          }
+      });
+  });
 </script>
 @endsection

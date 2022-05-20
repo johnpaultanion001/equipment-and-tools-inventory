@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeMail extends Mailable
+class EmailNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,9 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($content)
     {
-        //
+        $this->content = $content;
     }
 
     /**
@@ -28,6 +28,7 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcomeMail');
+        return $this->markdown('emails.emailNotification')
+                       ->with('content',$this->content);
     }
 }
