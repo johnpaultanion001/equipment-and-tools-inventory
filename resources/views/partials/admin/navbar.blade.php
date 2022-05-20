@@ -67,9 +67,6 @@
                             <i class="now-ui-icons ui-1_settings-gear-63" aria-hidden="true"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                          
-                            <a class="dropdown-item" href="/admin/edit_account">Edit Account</a>
-                         
                             <a class="dropdown-item" href="/admin/change_password">Change Password?</a>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
                           </div>

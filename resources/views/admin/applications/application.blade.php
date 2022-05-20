@@ -6,17 +6,17 @@
             <div class="col-xs-12 col-sm-6 col-md-4 mt-5">
                 <div class="card">
                     <div class="card-body text-center">
-                        <p><img class="rounded-circle z-depth-2" width="90" src="/assets/applicant_picture/{{$application->image}}" alt="card image"></p>
+                        <p><img class="rounded-circle z-depth-2" width="90" height="80" src="/assets/applicant_picture/{{$application->image}}" alt="card image"></p>
                         <h4 class="card-title">{{$application->name}}</h4>
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <p class="card-text font-weight-bold">
                                         <i class="fa-solid fa-at" style="color: #63D7FF;"></i> 
                                         {{$application->user->email}}
                                     </p>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <p class="card-text font-weight-bold">
                                         <i class="fa-solid fa-phone" style="color: #63D7FF;"></i>
                                         {{$application->contact_number}}

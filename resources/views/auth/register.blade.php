@@ -3,7 +3,7 @@
 @section('styles')
 <style>
   .background{
-    height: 120vh !important;
+    height: 100% !important;
   }
 </style>
 @endsection

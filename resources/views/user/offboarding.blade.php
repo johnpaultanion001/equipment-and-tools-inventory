@@ -475,10 +475,12 @@
                                 <div class="tab-pane {{Auth()->user()->application->status == 'COMPLETED' ? 'active':''}}" id="step3">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p>Questions:</p>
-                                            <p>1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                            <p>2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                            <p>3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <b>Questions:</b>
+                                            <p>1. How would you describe the culture of the company?</p>
+                                            <p>2. Can you tell me some of the good and bad experiences you had while working in this company?</p>
+                                            <p>3. Are your satisfied with your overall internship experience.</p>
+                                            <p>4. What are the skills that you gained that you can use to your future profession?</p>
+                                            <p>5. Do you have any suggestions on what areas of function would need to be changed?</p>
                                                 
                                         </div>
                                         <div class="col-md-12">
