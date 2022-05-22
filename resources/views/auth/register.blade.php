@@ -16,8 +16,7 @@
           <form method="POST" id="myForm" class="form-horizontal ">
             @csrf
             <div class="card-header text-center px-3 px-md-4 py-0">
-              <h3 class="card-title title-up  mt-4
-              ">Sign up</h3>
+              <img  src="/assets/images/logo.jpg" alt="logo" width="80" height="70" class="z-depth-2">
               <p style="font-weight: 700; line-height: 1; font-size: 14px;"><b>Getting started is easy. Sign up now.</b></p>
             </div>
             
@@ -52,7 +51,7 @@
                   </div>
                   <div class="col-sm-6">
                           <div class="form-group text-uppercase h6">
-                          <label>Email:  <span class="text-danger">*</span></label>
+                          <label>Email: (Email must  be active) <span class="text-danger">*</span></label>
                           <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                           <span class="invalid-feedback" role="alert">
                               <strong id="error-email"></strong>

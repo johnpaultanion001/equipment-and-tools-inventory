@@ -23,7 +23,7 @@
                             @foreach($registrations as $register)
                                 <tr>
                                     <td>
-                                        <button class="btn {{$register->status == 'PENDING' ? 'btn-warning status':'btn-success'}}  btn-wd btn-sm " status="{{$register->id ?? ''}}">
+                                        <button class="btn {{$register->status == 'PENDING' ? 'btn-warning status':'btn-danger'}}  btn-wd btn-sm " status="{{$register->id ?? ''}}">
                                             {{$register->status ?? ''}}
                                         </button>
                                     </td>
@@ -148,6 +148,42 @@
     </div>
 </form>
 
+<form method="post" id="declinedForm" class="form-horizontal ">
+    @csrf
+    <div class="modal" id="declinedModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog  modal-lg  modal-dialog-centered ">
+            <div class="modal-content">
+               
+                <div class="modal-body">
+                    <div class="row">
+                      
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label text-uppercase h6" >Reason:</label>
+                                <textarea name="reason" id="reason" class="form-control font-weight-bold"></textarea>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-reason"></strong>
+                                </span>
+                            </div>
+                        </div>
+                    
+                      
+                     
+                       
+                    </div>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer bg-white">
+                    <input type="button" id="decline_close" class="text-uppercase btn btn-default btn-wd" value="CLOSE" />
+                    <input type="submit" name="decline_action_button" id="decline_action_button" class="text-uppercase btn btn-danger btn-wd" value="DECLINE" />
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</form>
+
 @endsection
 @section('scripts')
 <script>
@@ -208,6 +244,76 @@ $(document).on('click', '.status', function(){
 });
 
 
+$(document).on('click', '#decline_button', function(){
+    $('#declinedModal').modal('show');
+    $('#declinedForm')[0].reset();
+    $('.form-control').removeClass('is-invalid');
+});
+
+$(document).on('click', '#decline_close', function(){
+    $('#declinedModal').modal('hide');
+    $('#reason').focus();
+});
+
+$('#declinedForm').on('submit', function(event){
+    event.preventDefault();
+    $('.form-control').removeClass('is-invalid')
+    var action_url = "/admin/registration/"+id+"/declined";
+    var type = "post";
+
+    $.ajax({
+        url: action_url,
+        method:type,
+        data:$(this).serialize(),
+        dataType:"json",
+        beforeSend:function(){
+            $("#decline_action_button").attr("disabled", true);
+            $("#decline_action_button").val("LOADING..");
+        },
+        success:function(data){
+            $("#decline_action_button").attr("disabled", false);
+            $("#decline_action_button").val("DECLINE");
+
+            if(data.errors){
+                $.each(data.errors, function(key,value){
+                    if(key == $('#'+key).attr('id')){
+                        $('#'+key).addClass('is-invalid')
+                        $('#error-'+key).text(value)
+                    }
+                })
+            }
+            if(data.success){
+                $('.form-control').removeClass('is-invalid')
+                $('#myForm')[0].reset();
+                $.confirm({
+                title: 'Confirmation',
+                message: data.success,
+                type: 'green',
+                buttons: {
+                        confirm: {
+                            text: 'confirm',
+                            btnClass: 'btn-blue',
+                            keys: ['enter', 'shift'],
+                            action: function(){
+                                location.reload();
+                            }
+                        },
+                        
+                    }
+                });
+                $('#declinedModal').modal('hide');
+                $('#myModal').modal('hide');
+            }
+            
+        }
+    });
+});
+
+$( "#dialog-confirm" ).dialog({
+   width : 500, 
+   height:500
+});
+
 $('#myForm').on('submit', function(event){
     event.preventDefault();
     $('.form-control').removeClass('is-invalid')
@@ -221,9 +327,11 @@ $('#myForm').on('submit', function(event){
         dataType:"json",
         beforeSend:function(){
             $("#action_button").attr("disabled", true);
+            $("#action_button").val("LOADING..");
         },
         success:function(data){
             $("#action_button").attr("disabled", false);
+            $("#action_button").val("APPROVE");
 
             if(data.errors){
                 $.each(data.errors, function(key,value){
@@ -260,62 +368,6 @@ $('#myForm').on('submit', function(event){
 });
 
 
-$(document).on('click', '.remove', function(){
-  var id = $(this).attr('remove');
-  $.confirm({
-      title: 'Confirmation',
-      content: 'You really want to remove this record?',
-      type: 'red',
-      buttons: {
-          confirm: {
-              text: 'confirm',
-              btnClass: 'btn-blue',
-              keys: ['enter', 'shift'],
-              action: function(){
-                  return $.ajax({
-                      url:"/admin/email/"+id,
-                      method:'DELETE',
-                      data: {
-                          _token: '{!! csrf_token() !!}',
-                      },
-                      dataType:"json",
-                      beforeSend:function(){
-                        $(".remove").attr("disabled", true);
-                      },
-                      success:function(data){
-                        $(".remove").attr("disabled", false);
-                        
-                          if(data.success){
-                            $.confirm({
-                              title: 'Confirmation',
-                              content: data.success,
-                              type: 'green',
-                              buttons: {
-                                      confirm: {
-                                          text: 'confirm',
-                                          btnClass: 'btn-blue',
-                                          keys: ['enter', 'shift'],
-                                          action: function(){
-                                              location.reload();
-                                          }
-                                      },
-                                      
-                                  }
-                              });
-                          }
-                      }
-                  })
-              }
-          },
-          cancel:  {
-              text: 'cancel',
-              btnClass: 'btn-red',
-              keys: ['enter', 'shift'],
-          }
-      }
-  });
-
-});
 
 </script>
 @endsection

@@ -11,9 +11,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //Admin
     Route::get('/home', 'AdminController@home')->name('home');
     // Route::resource('email', 'RegisterEmailController');
+
+    
+    Route::get('/master_list', 'RegistrationController@master_list')->name('master_list');
     Route::get('/registration', 'RegistrationController@index')->name('registration');
     Route::get('/registration/{id}', 'RegistrationController@show')->name('registration.show');
     Route::post('/registration/{id}', 'RegistrationController@store')->name('registration.store');
+    Route::post('/registration/{id}/declined', 'RegistrationController@declined')->name('registration.declined');
 
     Route::get('/applications', 'ApplicationController@index')->name('index');
     Route::get('/applications/{application}', 'ApplicationController@full_details')->name('full_details');

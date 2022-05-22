@@ -13,7 +13,7 @@ class RegistrationController extends Controller
             'name'   => ['required'],
             'school' => ['required'],
             'intern_id' =>  ['required'],
-            'email' =>  ['required', 'unique:users'],
+            'email' =>  ['required'],
             'google_drive' =>  ['required'],
             'attach_attendance' =>  ['required'],
         ]);
@@ -41,6 +41,6 @@ class RegistrationController extends Controller
                 'status'  =>  'PENDING',
             ]
         );
-        return response()->json(['success' => 'Successfully submited wait for the response of the admin to approve your registration.']);
+        return response()->json(['success' => '<p class="text-justify ">Successfully submited wait for the response of the admin to approve your registration.</p>']);
     }
 }

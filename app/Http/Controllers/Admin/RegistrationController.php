@@ -13,15 +13,25 @@ use Gate;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailNotification;
+use App\Mail\DeclinedNotification;
 use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
     public function index(){
+        date_default_timezone_set('Asia/Manila');
         abort_if(Gate::denies('admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $registrations = Registration::latest()->get();
+        $registrations = Registration::orderBy('updated_at', 'desc')->whereIn('status',['PENDING', 'DECLINED'])->get();
         return view('admin.registration.registration' , compact('registrations')); 
     }
+    public function master_list(){
+        date_default_timezone_set('Asia/Manila');
+        abort_if(Gate::denies('admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $registrations = Registration::orderBy('updated_at', 'desc')->whereIn('status',['APPROVED'])->get();
+        return view('admin.registration.master_list' , compact('registrations')); 
+    }
+
+    
 
     public function show(Registration $id){
         if (request()->ajax()) {
@@ -68,5 +78,28 @@ class RegistrationController extends Controller
             'status'   => 'APPROVED'
         ]);
         return response()->json(['success' => 'Successfully approved.']);
+    }
+
+    public function declined(Request $request, Registration $id){
+        date_default_timezone_set('Asia/Manila');
+        $validated =  Validator::make($request->all(), [
+            'reason' => ['required'],
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+
+        $emailNotif = [
+            'notif_message'     => 'The account you requested has been declined.',
+            'note'              => $request->input('reason'),
+        ];
+        Mail::to($id->email)
+                ->send(new DeclinedNotification($emailNotif));
+
+        $id->update([
+            'status'   => 'DECLINED'
+        ]);
+        return response()->json(['success' => 'Successfully declined.']);
     }
 }

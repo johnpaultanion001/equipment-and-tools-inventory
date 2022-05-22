@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg">
               <div class="container">
                 <div class="navbar-translate">
+                <img  src="/assets/images/logo.jpg" alt="logo" width="50" height="40" class="z-depth-2">
                   <a class="navbar-brand" href="/admin/announcements">{{ trans('panel.site_title') }}</a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-danger" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
@@ -33,9 +34,14 @@
                             <p>HOME</p>
                           </a>
                         </li>
-                         <li class="nav-item">
+                        <li class="nav-item">
                           <a class="nav-link {{ request()->is('admin/registration')  ? 'active' : '' }}" href="/admin/registration">
                             <p>REGISTRATION</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link {{ request()->is('admin/master_list')  ? 'active' : '' }}" href="/admin/master_list">
+                            <p>MASTER LIST</p>
                           </a>
                         </li>
                         <!-- <li class="nav-item">
