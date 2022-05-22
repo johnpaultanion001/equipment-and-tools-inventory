@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
               <div class="container">
                 <div class="navbar-translate">
-                <img  src="/assets/images/logo.jpg" alt="logo" width="50" height="40" class="z-depth-2">
+                <img  src="/assets/images/logo.png" alt="logo" width="50" height="40" class="z-depth-2">
                   <a class="navbar-brand" href="/admin/announcements">{{ trans('panel.site_title') }}</a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-danger" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>

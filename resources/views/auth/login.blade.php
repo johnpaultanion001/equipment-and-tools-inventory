@@ -10,7 +10,7 @@
                 @csrf
                 <div class="card-header text-center px-3 px-md-4 py-0">
                 
-                  <img  src="/assets/images/logo.jpg" alt="logo" width="80" height="70" class="z-depth-2">
+                  <img  src="/assets/images/logo.png" alt="logo" width="80" height="70" class="z-depth-2">
                   <p style="font-weight: 700; line-height: 1; font-size: 14px;"><b>MEMBER LOGIN</b></p>
                   <hr>
                 </div>

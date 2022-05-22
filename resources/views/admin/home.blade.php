@@ -2,12 +2,12 @@
 @section('content')
 <div class="col-xl-12">
     <div class="row">
-        <div class="col-md-8 mx-auto mt-4">
-            <img  src="/assets/images/bg.jpg" alt="bg" width="1200">
+        <div class="col-md-12  mt-4 text-white">
+            <h1>
+                HOME
+            </h1>
         </div>
     </div>
-    
-
 </div>
 
 

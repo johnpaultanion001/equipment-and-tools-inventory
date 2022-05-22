@@ -21,6 +21,7 @@ class RegistrationController extends Controller
     public function index(){
         date_default_timezone_set('Asia/Manila');
         abort_if(Gate::denies('admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
         $registrations = Registration::orderBy('updated_at', 'desc')->whereIn('status',['PENDING', 'DECLINED'])->get();
         return view('admin.registration.registration' , compact('registrations')); 
     }

@@ -243,77 +243,6 @@ $(document).on('click', '.status', function(){
     })
 });
 
-
-$(document).on('click', '#decline_button', function(){
-    $('#declinedModal').modal('show');
-    $('#declinedForm')[0].reset();
-    $('.form-control').removeClass('is-invalid');
-});
-
-$(document).on('click', '#decline_close', function(){
-    $('#declinedModal').modal('hide');
-    $('#reason').focus();
-});
-
-$('#declinedForm').on('submit', function(event){
-    event.preventDefault();
-    $('.form-control').removeClass('is-invalid')
-    var action_url = "/admin/registration/"+id+"/declined";
-    var type = "post";
-
-    $.ajax({
-        url: action_url,
-        method:type,
-        data:$(this).serialize(),
-        dataType:"json",
-        beforeSend:function(){
-            $("#decline_action_button").attr("disabled", true);
-            $("#decline_action_button").val("LOADING..");
-        },
-        success:function(data){
-            $("#decline_action_button").attr("disabled", false);
-            $("#decline_action_button").val("DECLINE");
-
-            if(data.errors){
-                $.each(data.errors, function(key,value){
-                    if(key == $('#'+key).attr('id')){
-                        $('#'+key).addClass('is-invalid')
-                        $('#error-'+key).text(value)
-                    }
-                })
-            }
-            if(data.success){
-                $('.form-control').removeClass('is-invalid')
-                $('#myForm')[0].reset();
-                $.confirm({
-                title: 'Confirmation',
-                message: data.success,
-                type: 'green',
-                buttons: {
-                        confirm: {
-                            text: 'confirm',
-                            btnClass: 'btn-blue',
-                            keys: ['enter', 'shift'],
-                            action: function(){
-                                location.reload();
-                            }
-                        },
-                        
-                    }
-                });
-                $('#declinedModal').modal('hide');
-                $('#myModal').modal('hide');
-            }
-            
-        }
-    });
-});
-
-$( "#dialog-confirm" ).dialog({
-   width : 500, 
-   height:500
-});
-
 $('#myForm').on('submit', function(event){
     event.preventDefault();
     $('.form-control').removeClass('is-invalid')
@@ -361,6 +290,72 @@ $('#myForm').on('submit', function(event){
                     }
                 });
                 $('#formModal').modal('hide');
+            }
+            
+        }
+    });
+});
+
+
+$(document).on('click', '#decline_button', function(){
+    $('#declinedModal').modal('show');
+    $('#declinedForm')[0].reset();
+    $('.form-control').removeClass('is-invalid');
+});
+
+$(document).on('click', '#decline_close', function(){
+    $('#declinedModal').modal('hide');
+    $('#reason').focus();
+});
+
+$('#declinedForm').on('submit', function(event){
+    event.preventDefault();
+    $('.form-control').removeClass('is-invalid')
+    var action_url = "/admin/registration/"+id+"/declined";
+    var type = "post";
+
+    $.ajax({
+        url: action_url,
+        method:type,
+        data:$(this).serialize(),
+        dataType:"json",
+        beforeSend:function(){
+            $("#decline_action_button").attr("disabled", true);
+            $("#decline_action_button").val("LOADING..");
+        },
+        success:function(data){
+            $("#decline_action_button").attr("disabled", false);
+            $("#decline_action_button").val("DECLINE");
+
+            if(data.errors){
+                $.each(data.errors, function(key,value){
+                    if(key == $('#'+key).attr('id')){
+                        $('#'+key).addClass('is-invalid')
+                        $('#error-'+key).text(value)
+                    }
+                })
+            }
+            if(data.success){
+                $('.form-control').removeClass('is-invalid')
+                $('#myForm')[0].reset();
+                $.confirm({
+                title: 'Confirmation',
+                content: data.success,
+                type: 'green',
+                buttons: {
+                        confirm: {
+                            text: 'confirm',
+                            btnClass: 'btn-blue',
+                            keys: ['enter', 'shift'],
+                            action: function(){
+                                location.reload();
+                            }
+                        },
+                        
+                    }
+                });
+                $('#declinedModal').modal('hide');
+                $('#myModal').modal('hide');
             }
             
         }
