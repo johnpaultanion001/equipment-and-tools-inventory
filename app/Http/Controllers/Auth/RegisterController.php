@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\RoleUser;
 use App\Models\User;
-use App\Models\Application;
-use App\Models\RegisterEmail;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -41,47 +39,33 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $emails = RegisterEmail::latest()->get();
-        foreach ($emails as $email) {
-            $r_email[] = array(
-                $email->email,
-            );
-        }
-
-        return Validator::make($data,
-            [
-                'name'   => ['required'],
-                'contact_number'   => ['required', 'string', 'min:8','max:11'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 
-                                'exists:register_emails,email'],
-                'password' => ['required', 'string' ,'confirmed'
-                                ,'min:8'],
-            ], ['email.exists' => 'The input email address is invalid, contact the administration to verify your email address.']);
+        return Validator::make($data, [
+            'name' => ['required', 'string',  'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'contact_number'   => ['required', 'string', 'min:8','max:11'],
+            'address'   => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
     }
 
     protected function create(array $data)
     {
         $user = User::create([
+            'name' => $data['name'],
             'email' => $data['email'],
+            'contact_number' => $data['contact_number'],
+            'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
-        
-        Application::create([
-            'user_id' => $user->id,
-            'name' => $data['name'],
-            'contact_number' => $data['contact_number'],
-        ]);
+
         RoleUser::insert([
             'user_id' => $user->id,
             'role_id' => 2,
         ]);
-
         return $user;
-      
-      
     }
 
     public function redirectPath(){
-        return route('admin.user.home');
+        return route('admin.user.events');
     }
 }

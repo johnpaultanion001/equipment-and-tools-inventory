@@ -20,7 +20,10 @@ class User extends Authenticatable
     public $table = 'users';
     
     protected $fillable = [
+        'name',
         'email',
+        'contact_number',
+        'address',
         'email_verified_at',
         
         'password',
@@ -36,13 +39,9 @@ class User extends Authenticatable
         'remember_token',
     ];
   
-    public function application()
-    {
-        return $this->belongsTo(Application::class, 'id', 'user_id');
-    }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
+    
 }

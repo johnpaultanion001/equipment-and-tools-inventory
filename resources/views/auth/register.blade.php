@@ -1,145 +1,139 @@
-@extends('layouts.admin1')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('styles')
-<style>
-  .background{
-    height: 100% !important;
-  }
-</style>
-@endsection
-@section('content')
-<div class="col-xl-12">
-  <div class="row">
-      <div class="col-xl-8 mx-auto mt-5">
-      <div class="card p-3  d-block mx-auto">
-        <div class="py-4">
-          <form method="POST" id="myForm" class="form-horizontal ">
-            @csrf
-            <div class="card-header text-center px-3 px-md-4 py-0">
-              <img  src="/assets/images/logo.png" alt="logo" width="80" height="70" class="z-depth-2">
-              <p style="font-weight: 700; line-height: 1; font-size: 14px;"><b>Getting started is easy. Sign up now.</b></p>
-            </div>
-            
-            <div class="card-body px-4 px-md-5">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ trans('panel.site_title') }} - Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="assets/css/sb-admin-2.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
                 <div class="row">
-                  <div class="col-sm-6">
-                          <div class="form-group text-uppercase h6">
-                          <label>Name:  <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" name="name" id="name" placeholder="Name" autofocus>
-                          <span class="invalid-feedback" role="alert">
-                              <strong id="error-name"></strong>
-                          </span>
-                      </div> 
-                  </div>
-                  <div class="col-sm-6">
-                          <div class="form-group text-uppercase h6">
-                          <label>School:  <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" name="school" id="school" placeholder="School">
-                          <span class="invalid-feedback" role="alert">
-                              <strong id="error-school"></strong>
-                          </span>
-                      </div> 
-                  </div>
-                  <div class="col-sm-6">
-                          <div class="form-group text-uppercase h6">
-                          <label>Intern ID:  <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" name="intern_id" id="intern_id" placeholder="Intern ID">
-                          <span class="invalid-feedback" role="alert">
-                              <strong id="error-intern_id"></strong>
-                          </span>
-                      </div> 
-                  </div>
-                  <div class="col-sm-6">
-                          <div class="form-group text-uppercase h6">
-                          <label>Email: (Email must  be active) <span class="text-danger">*</span></label>
-                          <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                          <span class="invalid-feedback" role="alert">
-                              <strong id="error-email"></strong>
-                          </span>
-                      </div> 
-                  </div>
-                  <div class="col-sm-12">
-                          <div class="form-group text-uppercase h6">
-                          <label>Google Drive Link:  <span class="text-danger">*</span></label>
-                          <input type="text" class="form-control" name="google_drive" id="google_drive" placeholder="Google Drive Link">
-                          <span class="invalid-feedback" role="alert">
-                              <strong id="error-google_drive"></strong>
-                          </span>
-                      </div> 
-                  </div>
-                  <div class="col-sm-12">
-                          <div class="form-group text-uppercase h6">
-                          <label>Attach Proof Of Attendance:  <span class="text-danger">*</span></label>
-                          <input type="file" class="form-control" name="attach_attendance" id="attach_attendance" placeholder="Attach Proof Of Attendance">
-                          <span class="invalid-feedback" role="alert">
-                              <strong id="error-attach_attendance"></strong>
-                          </span>
-                      </div> 
-                  </div>
+                    <div class="col-lg-12 mx-auto">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user" method="POST" action="{{ route('register') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" placeholder="Your Name" id="name" name="name" value="{{ old('name') }}" autofocus>
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" placeholder="Email Address" id="email" name="email" value="{{ old('email') }}">
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="contact_number">Contact Number<span class="text-danger">*</span></label>
+                                            <input type="number" class="form-control form-control-user @error('contact_number') is-invalid @enderror" placeholder="Contact Number" id="contact_number" name="contact_number" value="{{ old('contact_number') }}">
+                                            @error('contact_number')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="address">Address<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control form-control-user @error('address') is-invalid @enderror" placeholder="Address" id="address" name="address" value="{{ old('address') }}">
+                                            @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="password">Password<span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" placeholder="Password" id="password" name="password">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="password">Confirm Password<span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control form-control-user" placeholder="Confirm Password" id="password-confirm" name="password_confirmation">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Register Account
+                                </button>
+                              
+                            </form>
+                            <hr>
+                            
+                            <div class="text-center">
+                                <a class="small" href="/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              <input type="submit" id="action_button" class="btn btn-main" value="Submit" />
-              
             </div>
-          </form>
-          <p class="text-center mt-3 text-dark" style="font-size: 15px; font-weight: 500;">Already have an account? <a href="/login"><button class="btn btn-sm btn-info" style="font-weight: 700">Login here</button></a></p>
         </div>
-        
-      </div>
-      </div>
-  </div>
-</div>
-@endsection
-@section('scripts')
-<script>
-  $('#myForm').on('submit', function(event){
-      event.preventDefault();
-      $('.form-control').removeClass('is-invalid')
-      var action_url = "/registration";
-      var type = "POST";
 
-      $.ajax({
-          url: action_url,
-          method:type,
-          data:  new FormData(this),
-          contentType: false,
-          cache: false,
-          processData: false,
-          dataType:"json",
+    </div>
 
-          beforeSend:function(){
-              $("#action_button").attr("disabled", true);
-          },
-          success:function(data){
-              $("#action_button").attr("disabled", false);
-          
-              if(data.errors){
-                  $.each(data.errors, function(key,value){
-                      if(key == $('#'+key).attr('id')){
-                          $('#'+key).addClass('is-invalid')
-                          $('#error-'+key).text(value)
-                      }
-                  })
-              }
-              if(data.success){
-                  $.confirm({
-                      title: data.success,
-                      content: "",
-                      type: 'green',
-                      buttons: {
-                          confirm: {
-                              text: '',
-                              btnClass: 'btn-green',
-                              keys: ['enter', 'shift'],
-                              action: function(){
-                                  location.reload();
-                              }
-                          },
-                      }
-                  });
-              }
-              
-          }
-      });
-  });
-</script>
-@endsection
+    <!-- Bootstrap core JavaScript-->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="assets/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
