@@ -23,6 +23,7 @@
                             <th>Time</th>
                             <th>Is Open?</th>
                             <th>Created At</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
