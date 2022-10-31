@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
             [
                 'email'          => 'admin@admin.com',
                 'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
-                'name'           => 'Johnpaul Admin',
+                'name'           => 'Test Admin',
                 'email_verified_at' => date("Y-m-d H:i:s"),
                 'remember_token' => null,
                 'created_at' => date("Y-m-d H:i:s"),
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             [
                 'email'          => 'user@user.com',
                 'password'       => '$2y$10$vUIzDlvfpu2yOATsPYcPaOTY/zgbgwViLIWSfZxSlmRBFV.g/fmOW',
-                'name'           => 'Johnpaul User',
+                'name'           => 'Test User',
                 'email_verified_at' => date("Y-m-d H:i:s"),
                 'remember_token' => null,
                 'created_at' => date("Y-m-d H:i:s"),
