@@ -18,7 +18,7 @@
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    
+    @yield('styles')
 </head>
 
 <body id="page-top">

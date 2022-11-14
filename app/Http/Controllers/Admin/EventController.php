@@ -52,13 +52,35 @@ class EventController extends Controller
   
     public function edit(Event $event)
     {
-        //
+        if (request()->ajax()) {
+            return response()->json(['result' =>  $event]);
+        }
     }
 
     
     public function update(Request $request, Event $event)
     {
-        //
+        $validated =  Validator::make($request->all(), [
+            'category'   => ['required'],
+            'title'   => ['required'],
+            'location'   => ['required'],
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()]);
+        }
+
+        $event->update([
+            'category'     => $request->input('category'),
+            'title'     => $request->input('title'),
+            'location'     => $request->input('location'),
+            'date'     => $request->input('date') ?? $event->date,
+            'time'     => $request->input('time') ?? $event->time,
+            'description'     => $request->input('description'),
+            
+        ]);
+
+        return response()->json(['success' => 'Successfully updated!']);
     }
 
   

@@ -1,6 +1,6 @@
 <?php
 
-Route::redirect('/', '/login');
+Route::redirect('/', '/admin/dashboard');
 
 
 Auth::routes();
@@ -15,7 +15,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/members', 'AdminController@members')->name('members');
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::get('/dashboard/{event_id}', 'AdminController@dashboard_event')->name('dashboard_event');
+    
+    Route::resource('sponsors', 'SponsorController');
+    Route::post('sponsors/update/{sponsor}', 'SponsorController@update_sponsor')->name('sponsors.update_sponsor');
 
+    Route::resource('budgets', 'BudgetController');
     //Members 
     Route::get('/user/events', 'UsersController@events')->name('user.events');
     Route::get('/user/events/{event}', 'UsersController@store_event')->name('user.store_event');

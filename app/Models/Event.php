@@ -25,6 +25,7 @@ class Event extends Model
         'time',
         'isOpen',
         'description',
+        'isRemove',
         'created_at',
         'updated_at',
     ];
@@ -32,5 +33,10 @@ class Event extends Model
     public function attended()
     {
         return $this->hasMany(AttendEvent::class, 'event_id','event_id');
+    }
+
+    public function budgets()
+    {
+        return $this->hasMany(BudgetEvent::class, 'event_id','event_id');
     }
 }

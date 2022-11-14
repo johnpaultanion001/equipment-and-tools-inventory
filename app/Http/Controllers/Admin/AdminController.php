@@ -19,8 +19,12 @@ class AdminController extends Controller
         return view('admin.members.members', compact('users')); 
     }
     public function dashboard(){
-        $event = Event::latest()->first();
-        return redirect('/admin/dashboard/'.$event->event_id);
+        if(auth()->user()->roles()->pluck('id')->implode(', ') == '2'){
+            return redirect('/admin/user/events');
+        }else if(auth()->user()->roles()->pluck('id')->implode(', ') == '1'){
+            $event = Event::latest()->first();
+            return redirect('/admin/dashboard/'.$event->event_id);
+        }
     }
 
     public function dashboard_event($event_id){

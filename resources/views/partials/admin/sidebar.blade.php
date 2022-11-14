@@ -28,6 +28,16 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Members</span></a>
     </li>
+    <li class="nav-item {{ request()->is('admin/sponsors')  ? 'active' : '' }}">
+        <a class="nav-link" href="/admin/sponsors">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Sponsors</span></a>
+    </li>
+    <li class="nav-item {{ request()->is('admin/budgets')  ? 'active' : '' }}">
+        <a class="nav-link" href="/admin/budgets">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Budgets</span></a>
+    </li>
 @endcan
 
 @can('user_access')

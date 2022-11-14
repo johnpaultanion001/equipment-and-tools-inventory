@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Sponsor;
 use Illuminate\Database\Seeder;
 
 
@@ -35,8 +36,8 @@ class UsersTableSeeder extends Seeder
             [
                 'event_id'          => 'EVT985529',
                 'category'          => 'Activity',
-                'title'          => 'A pariatur Rerum no',
-                'location'          => 'Voluptatem ',
+                'title'          => 'Basketball',
+                'location'          => 'Basketball Court',
                 'date'          => '2022-09-13',
                 'time'          => '22:29',
                 'isOpen'          => 'YES',
@@ -48,8 +49,8 @@ class UsersTableSeeder extends Seeder
             [
                 'event_id'          => 'EVT985836',
                 'category'          => 'Activity',
-                'title'          => 'Quo eum illo veritat',
-                'location'          => 'Laborum eu minim iru ',
+                'title'          => 'Volleyball',
+                'location'          => 'Volleyball Court',
                 'date'          => '2022-09-13',
                 'time'          => '13:12',
                 'isOpen'          => 'YES',
@@ -73,10 +74,49 @@ class UsersTableSeeder extends Seeder
             ],
         ];
 
+        $sponsors = [
+            [
+               'title'          => 'Mayor',
+               'image'           => 'bg1.jpg',
+               
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'title'          => 'Kagawad',
+                'image'           => 'bg2.jpg',
+                
+                 'created_at' => date("Y-m-d H:i:s"),
+                 'updated_at' => date("Y-m-d H:i:s"),
+             ],
+             [
+                'title'          => 'Sk Chairman',
+                'image'           => 'bg3.jpg',
+                
+                 'created_at' => date("Y-m-d H:i:s"),
+                 'updated_at' => date("Y-m-d H:i:s"),
+             ],
+             [
+                'title'          => 'Home Owner',
+                'image'           => 'bg4.jpg',
+                
+                 'created_at' => date("Y-m-d H:i:s"),
+                 'updated_at' => date("Y-m-d H:i:s"),
+             ],
+             [
+                'title'          => 'Village Owner',
+                'image'           => 'bg5.jpg',
+                
+                 'created_at' => date("Y-m-d H:i:s"),
+                 'updated_at' => date("Y-m-d H:i:s"),
+             ],
+        ];
+
 
         
         User::insert($accounts);
         Event::insert($events);
+        Sponsor::insert($sponsors);
      
         
     }

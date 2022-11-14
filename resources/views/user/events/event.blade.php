@@ -26,7 +26,6 @@
                 </div>
             </div>
             <div class="row card-row shadow">
-               
                 <div class="col-12 col-sm-4 my-2 mb-3">
                     <div><p class="label">Location</p>{{$event->location ?? ''}}</div>
                 </div>
@@ -54,6 +53,15 @@
                     @endif
                 </div>
 
+            </div>
+            <div class="row card-row shadow">
+                <div class="col-12 col-sm-4 my-2 mb-3">
+                    <div><p class="label">Budgets</p>
+                        @foreach($event->budgets()->get() as $budget)
+                            {{$budget->title ?? ''}} <br>
+                        @endforeach
+                    </div>
+                </div>
             </div>
             @if($event_attend !== null)
                 <div class="row">

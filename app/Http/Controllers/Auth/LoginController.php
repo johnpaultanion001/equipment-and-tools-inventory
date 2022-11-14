@@ -48,7 +48,7 @@ class LoginController extends Controller
          if(Auth::user()->roles()->pluck('id')->implode(', ') == '2'){
              $redirectTo = '/admin/user/events';
          }else if(Auth::user()->roles()->pluck('id')->implode(', ') == '1'){
-             $redirectTo = '/admin/events';
+             $redirectTo = '/admin/dashboard';
          }
 
          return $request->wantsJson()

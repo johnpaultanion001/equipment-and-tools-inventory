@@ -61,6 +61,15 @@
                             <div><p class="label">Description</p>{{$event->description ?? ''}}</div>
                         </div>
                     </div>
+                    <div class="row card-row shadow">
+                        <div class="col-12 col-sm-4 my-2 mb-3">
+                            <div><p class="label">Budgets</p>
+                                @foreach($event->budgets()->get() as $budget)
+                                    {{$budget->title ?? ''}} <br>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="row">
