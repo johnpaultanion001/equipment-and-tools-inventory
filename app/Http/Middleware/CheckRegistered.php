@@ -18,7 +18,7 @@ class CheckRegistered
     public function handle(Request $request, Closure $next)
     {
         if (auth()->user()->isApproved == 0) {
-            return redirect()->to('admin/clinic/approve');
+            return redirect()->route('admin.user.approve');
         }
         return $next($request);
     }

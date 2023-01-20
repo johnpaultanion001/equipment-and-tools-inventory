@@ -1,12 +1,13 @@
 <?php
+use App\Http\Controllers\Admin;
 
 Route::redirect('/', '/admin/dashboard');
-
+Route::get('/admin/user/approve', [Admin\UsersController::class, 'approve'])->name('admin.user.approve');
 
 Auth::routes();
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth','checkregistered']], function () {
     
     //Admin
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
@@ -20,7 +21,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('sponsors/update/{sponsor}', 'SponsorController@update_sponsor')->name('sponsors.update_sponsor');
 
     Route::resource('budgets', 'BudgetController');
+
     //Members 
+   
     Route::get('/user/events', 'UsersController@events')->name('user.events');
     Route::get('/user/events/{event}', 'UsersController@store_event')->name('user.store_event');
     Route::get('/user/{event}', 'UsersController@event')->name('user.event');

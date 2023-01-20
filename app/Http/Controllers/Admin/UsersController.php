@@ -22,6 +22,10 @@ class UsersController extends Controller
         return view('user.events.events', compact('events')); 
     }
 
+    public function approve(){
+        return view('user.approve'); 
+    }
+
     public function store_event(Request $request, $event){
         AttendEvent::updateOrCreate(
             [
@@ -67,6 +71,7 @@ class UsersController extends Controller
             'email' => $request->input('email'),
             'contact_number' => $request->input('contact_number'),
             'address' => $request->input('address'),
+            'isApproved'    => $request->input('isApproved'),
         ]);
 
         return response()->json(['success' => 'Updated Successfully.']);

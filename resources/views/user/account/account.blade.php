@@ -56,6 +56,18 @@
                                                     <input type="hidden" id="user_id" value="{{$user->id ?? ''}}" readonly>
                                                 </div>
                                             </div>
+                                            @can('admin_access')
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <p class="label">Status <span class="text-danger">*</span></p>
+                                                    <select name="isApproved" id="isApproved" class="form-control">
+                                                        <option value="0" {{$user->isApproved == false ? 'selected' : '' }}>Pending</option>
+                                                        <option value="1" {{$user->isApproved == true ? 'selected' : '' }}>Approved</option>
+                                                    </select>
+                                                    
+                                                </div>
+                                            </div>
+                                            @endcan
                                             <div class="col-sm-6">
                                                 <button type="button" class="btn-warning btn" id="changepassword">Change Password</button>
                                             </div>

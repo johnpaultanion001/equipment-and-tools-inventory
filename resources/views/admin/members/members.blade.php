@@ -18,6 +18,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Status</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
@@ -28,6 +29,7 @@
                                     <tbody>
                                       @foreach($users as $user)
                                         <tr class='clickable-row' data-href="/admin/users/account/{{$user->id}}">
+                                            <td class="text-primary">{{$user->isApproved == '0' ? 'Pending':'Approved'}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->roles()->pluck('title')->implode(', ')}}</td>
