@@ -152,6 +152,15 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label class="control-label text-uppercase h6" >Budget: <span class="text-danger">*</span></label>
+                                <input type="number" name="budget" id="budget" class="form-control">
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-budget"></strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
                                 <label class="control-label text-uppercase h6" >Description:</label>
                                 <textarea name="description" id="description" class="form-control"></textarea>
                                 <span class="invalid-feedback" role="alert">
