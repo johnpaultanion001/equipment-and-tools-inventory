@@ -26,6 +26,7 @@ class Event extends Model
         'isOpen',
         'description',
         'isRemove',
+        'budget',
         'created_at',
         'updated_at',
     ];

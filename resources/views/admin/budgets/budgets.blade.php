@@ -24,8 +24,19 @@
                     <div class="my-1">
                         <div class="text-center">
                             <p class="label mb-4">{{$event->title ?? ''}}</p>
+                            <p class="label mb-4">Total Bugget: {{ number_format($event->budget ?? '' , 0, '.', ',') }}</p>
+                            
+                            @php
+                                $budget = $event->budget;
+                                $budgetPartition = $event->budgets()->count();
+                                if($budgetPartition == 0){
+                                    $budgetPartition = 1;
+                                }
+                                $budgetPerAct = $budget / $budgetPartition;
+                            @endphp
                             @foreach($event->budgets()->get() as $budget)
-                                <p class="label ">{{$budget->title ?? ''}}</p>
+                                <p class="label ">TITLE: {{$budget->title ?? ''}}  <br>
+                                                    BUDGET: {{ number_format($budgetPerAct ?? '' , 0, '.', ',') }}</p> <br>
                             @endforeach
                         </div>
                     </div>

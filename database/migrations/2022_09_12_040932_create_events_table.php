@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->string('time')->nullable();
             $table->string('isOpen')->nullable();
             $table->string('description')->nullable();
+            $table->float('budget')->default(10000);
             $table->integer('isRemove')->default('0');
             $table->timestamps();
         });

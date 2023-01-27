@@ -19,6 +19,7 @@
                             <th>Category</th>
                             <th>Title</th>
                             <th>Location</th>
+                            <th>Budget Of Event</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Is Open?</th>
@@ -33,6 +34,7 @@
                             <td>{{$event->category ?? ''}}</td>
                             <td>{{$event->title ?? ''}}</td>
                             <td>{{$event->location ?? ''}}</td>
+                            <td>{{ number_format($event->budget ?? '' , 0, '.', ',') }}</td>
                             <td>{{$event->date->format('M j , Y') }}</td>
                             <td>{{$event->time->format('h:i A') }}</td>
                             <td><span class="badge {{$event->isOpen == 'NO' ? 'badge-danger' : 'badge-primary'}}">{{$event->isOpen ?? ''}}</span></td>
@@ -43,6 +45,20 @@
                 </table>
             </div>
         </div>
+    </div>
+
+    <!-- Area Chart -->
+    <div class="card shadow mb-4" >
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Event Budget Report</h6>
+                
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChartEvent"></canvas>
+                </div>
+            </div>
     </div>
 </div>
 <form method="post" id="myForm" class="form-horizontal ">
@@ -108,6 +124,15 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label class="control-label text-uppercase h6" >Budget: <span class="text-danger">*</span></label>
+                                <input type="number" name="budget" id="budget" class="form-control">
+                                <span class="invalid-feedback" role="alert">
+                                    <strong id="error-budget"></strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
                                 <label class="control-label text-uppercase h6" >Description:</label>
                                 <textarea name="description" id="description" class="form-control"></textarea>
                                 <span class="invalid-feedback" role="alert">
@@ -134,6 +159,66 @@
 @section('scripts')
 <script>
 $(document).ready(function(){
+    var data_event = JSON.parse(`<?php echo $data_results_events; ?>`);
+    var chart_event = $("#myAreaChartEvent");
+
+    var data_event = {
+            labels: data_event.label,
+            datasets: [
+            {
+                label: "Score:",
+                data: data_event.data,
+
+                lineTension: 0.3,
+                backgroundColor: "rgba(78, 115, 223, 0.05)",
+                borderColor: "rgba(78, 115, 223, 1)",
+                pointRadius: 3,
+                pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                pointBorderColor: "rgba(78, 115, 223, 1)",
+                pointHoverRadius: 3,
+                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                pointHitRadius: 10,
+                pointBorderWidth: 2,
+                
+            }
+            ]
+    };
+
+    var options = {
+        maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 25,
+                    top: 25,
+                    bottom: 0
+                }
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                titleMarginBottom: 10,
+                titleFontColor: '#6e707e',
+                titleFontSize: 14,
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                displayColors: false,
+                intersect: false,
+                mode: 'index',
+                caretPadding: 10,
+            },
+    };
+
+    var chart_events = new Chart(chart_event, {
+        type: "line",
+        data: data_event,
+        options: options
+    });
+
     $(document).on('click', '#create_button', function(){
         $('#myModal').modal('show');
         $('#myForm')[0].reset();

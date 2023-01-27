@@ -12,7 +12,21 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::latest()->get();
-        return view('admin.events.events', compact('events')); 
+        $data_events = Event::select(
+            \DB::raw("budget as budgets"),
+            \DB::raw("title as titles"))
+            ->get();
+            
+        $result_data_events = [];
+
+        foreach($data_events as $row) {
+            $result_data_events['label'][] = $row->titles;
+            $result_data_events['data'][] =  $row->budgets;
+        }
+
+        $data_results_events = json_encode($result_data_events);
+
+        return view('admin.events.events', compact('events','data_results_events')); 
     }
  
     public function store(Request $request)
@@ -20,6 +34,7 @@ class EventController extends Controller
         $validated =  Validator::make($request->all(), [
             'category'   => ['required'],
             'title'   => ['required'],
+            'budget'   => ['required'],
             'location'   => ['required'],
             'date'   => ['required', 'date' , 'after:today'],
             'time'  => ['required'],
@@ -33,6 +48,7 @@ class EventController extends Controller
             'event_id' => 'EVT'.substr(time(), 4),
             'category'     => $request->input('category'),
             'title'     => $request->input('title'),
+            'budget'     => $request->input('budget'),
             'location'     => $request->input('location'),
             'date'     => $request->input('date'),
             'time'     => $request->input('time'),
@@ -64,6 +80,7 @@ class EventController extends Controller
             'category'   => ['required'],
             'title'   => ['required'],
             'location'   => ['required'],
+            'budget'   => ['required'],
         ]);
 
         if ($validated->fails()) {
@@ -76,6 +93,7 @@ class EventController extends Controller
             'location'     => $request->input('location'),
             'date'     => $request->input('date') ?? $event->date,
             'time'     => $request->input('time') ?? $event->time,
+            'budget'     => $request->input('budget'),
             'description'     => $request->input('description'),
             
         ]);
