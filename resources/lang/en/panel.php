@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'site_title' => 'Attendance',
+    'site_title' => 'JJEEMZS Construction Services.',
+    'site_logo' => 'logo.png',
 ];

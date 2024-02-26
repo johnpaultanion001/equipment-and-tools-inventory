@@ -8,7 +8,7 @@
 
 <div class="mr-auto">
     <h5>
-        {{ trans('panel.site_title') }}
+        <img src="/assets/img/{{ trans('panel.site_logo') }}" class="rounded mx-auto d-block" width="100" alt="logo">
     </h5>
 </div>
 <!-- Topbar Navbar -->
@@ -27,8 +27,8 @@
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
             aria-labelledby="userDropdown">
-          
-         
+
+
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

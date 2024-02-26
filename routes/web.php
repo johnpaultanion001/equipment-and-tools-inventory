@@ -8,7 +8,7 @@ Auth::routes();
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth','checkregistered']], function () {
-    
+
     //Admin
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::resource('events', 'EventController');
@@ -16,14 +16,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/members', 'AdminController@members')->name('members');
     Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::get('/dashboard/{event_id}', 'AdminController@dashboard_event')->name('dashboard_event');
-    
+
     Route::resource('sponsors', 'SponsorController');
     Route::post('sponsors/update/{sponsor}', 'SponsorController@update_sponsor')->name('sponsors.update_sponsor');
 
     Route::resource('budgets', 'BudgetController');
 
-    //Members 
-   
+    //Members
+
     Route::get('/user/events', 'UsersController@events')->name('user.events');
     Route::get('/user/events/{event}', 'UsersController@store_event')->name('user.store_event');
     Route::get('/user/{event}', 'UsersController@event')->name('user.event');
@@ -31,6 +31,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/users/account/{user}', 'UsersController@account')->name('user.account');
     Route::put('/users/account/{user}', 'UsersController@update_account')->name('user.update_account');
     Route::put('/users/pass/{user}', 'UsersController@update_pass')->name('user.update_pass');
+
+
+    //equipments
+    Route::get('/equipments', 'EquipmentController@index')->name('equipments.index');
+    Route::get('/equipments-all', 'EquipmentController@equipments')->name('equipments.equipments');
 });
 
 

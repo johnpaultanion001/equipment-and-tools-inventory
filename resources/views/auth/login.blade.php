@@ -37,7 +37,9 @@
                             <div class="col-lg-8 mx-auto mt-4">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Member Login!</h1>
+                                        <img src="assets/img/{{ trans('panel.site_logo') }}" class="rounded mx-auto d-block" width="200" alt="logo">
+                                        <br>
+                                        <h1 class="h3 text-gray-900 mb-4">{{ trans('panel.site_title') }}</h1>
                                     </div>
                                     <form method="POST" action="{{ route('login') }}" class="user">
                                       @csrf
@@ -70,9 +72,7 @@
                                             <strong>Please verify that you are not a robot.</strong>
                                         </span>
                                         @endif
-                                        {!! NoCaptcha::renderJs() !!}
-                                        {!! NoCaptcha::display() !!}
-                                        <br><br><br><br>
+
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
@@ -80,10 +80,10 @@
                                         <hr>
                                     </form>
                                     <hr>
-                                   
-                                    <div class="text-center">
+
+                                    <!-- <div class="text-center">
                                         <a class="small" href="/register">Create an Account!</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

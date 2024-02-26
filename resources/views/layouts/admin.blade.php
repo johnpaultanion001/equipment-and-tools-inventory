@@ -14,9 +14,9 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link href="{{ asset('assets/css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
@@ -34,7 +34,7 @@
             <!-- Main Content -->
             <div id="content">
                 @include('partials.admin.navbar')
-               
+
                 @yield('content')
 
             </div>
@@ -72,11 +72,17 @@
                     <a class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
-                    </form> 
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    <div id="overlay" style="display:none;">
+        <div class="spinner"></div>
+        <br/>
+        Loading...
+    </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}" type="text/javascript"></script>
